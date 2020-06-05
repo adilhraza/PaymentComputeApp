@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "G/8RTlCCJZMjlOcNzmcvEg/Gm3DDX4D73r0WPCi439K6w7vBGINvnzXWBekcrD2l6dzJGvKi8lrBv+VD5kJslg==",
+  "success": true,
+  "projectFilePath": "D:\\Projects\\ASP .NET Core\\PaymentComputeApp\\PaymentComputeApp.Entity\\PaymentComputeApp.Entity.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ANDRIJA\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
