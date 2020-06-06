@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7VwiUhmTgED/DuugaU2FetJMPuKuBovppR2R+P2/z/Yx6E2muof9CB0uNquXyVLKLyGGTDB25rS1lHOono/cTQ==",
+  "dgSpecHash": "U0m8JoDVRDSfWzLQ5QV1mmPktGwLq2gv/74F6tPnvg8GwuSEj6v2b92o86l/riiwJtZ1HOmtoF/4N8vUS1Fy6w==",
   "success": true,
   "projectFilePath": "D:\\Projects\\ASP .NET Core\\PaymentComputeApp\\PaymentComputeApp.WebUI\\PaymentComputeApp.WebUI.csproj",
   "expectedPackageFiles": [
@@ -206,7 +206,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.collections.immutable\\1.5.0\\system.collections.immutable.1.5.0.nupkg.sha512",
     "C:\\Users\\ANDRIJA\\.nuget\\packages\\system.collections.nongeneric\\4.3.0\\system.collections.nongeneric.4.3.0.nupkg.sha512",
     "C:\\Users\\ANDRIJA\\.nuget\\packages\\system.collections.specialized\\4.3.0\\system.collections.specialized.4.3.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.componentmodel.annotations\\4.5.0\\system.componentmodel.annotations.4.5.0.nupkg.sha512",
+    "C:\\Users\\ANDRIJA\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512",
     "C:\\Users\\ANDRIJA\\.nuget\\packages\\system.console\\4.3.0\\system.console.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.data.sqlclient\\4.6.0\\system.data.sqlclient.4.6.0.nupkg.sha512",
     "C:\\Users\\ANDRIJA\\.nuget\\packages\\system.diagnostics.contracts\\4.3.0\\system.diagnostics.contracts.4.3.0.nupkg.sha512",

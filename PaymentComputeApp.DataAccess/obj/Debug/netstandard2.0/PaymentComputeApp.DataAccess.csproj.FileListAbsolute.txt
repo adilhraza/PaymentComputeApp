@@ -1,0 +1,12 @@
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.DataAccess\obj\Debug\netstandard2.0\PaymentComputeApp.DataAccess.AssemblyInfoInputs.cache
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.DataAccess\obj\Debug\netstandard2.0\PaymentComputeApp.DataAccess.AssemblyInfo.cs
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.DataAccess\obj\Debug\netstandard2.0\PaymentComputeApp.DataAccess.csproj.CoreCompileInputs.cache
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.DataAccess\bin\Debug\netstandard2.0\PaymentComputeApp.DataAccess.deps.json
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.DataAccess\bin\Debug\netstandard2.0\PaymentComputeApp.DataAccess.dll
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.DataAccess\bin\Debug\netstandard2.0\PaymentComputeApp.DataAccess.pdb
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.DataAccess\bin\Debug\netstandard2.0\PaymentComputeApp.Entity.dll
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.DataAccess\bin\Debug\netstandard2.0\PaymentComputeApp.Entity.pdb
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.DataAccess\obj\Debug\netstandard2.0\PaymentComputeApp.DataAccess.csprojAssemblyReference.cache
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.DataAccess\obj\Debug\netstandard2.0\PaymentComputeApp.DataAccess.csproj.CopyComplete
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.DataAccess\obj\Debug\netstandard2.0\PaymentComputeApp.DataAccess.dll
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.DataAccess\obj\Debug\netstandard2.0\PaymentComputeApp.DataAccess.pdb

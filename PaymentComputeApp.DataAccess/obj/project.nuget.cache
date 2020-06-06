@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "3JvGto4aEfyCbhCi2ydvMrZsuuMjgLMdAO6LlhM40ST7zK3VfkyxHBmrSKTCJQlImXz0SYvLpG9HaNOCN8xvIA==",
+  "dgSpecHash": "OlE7gQvCWfJc7BtAr7NJsdHfyT8u9gRTFwaIGf0tXHHM2qfMuJAfWQxZ35c8nIqTmpk9M8WFLd+BNP/WjikLqQ==",
   "success": true,
   "projectFilePath": "D:\\Projects\\ASP .NET Core\\PaymentComputeApp\\PaymentComputeApp.DataAccess\\PaymentComputeApp.DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ANDRIJA\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\ANDRIJA\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }
