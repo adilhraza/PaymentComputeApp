@@ -49,6 +49,7 @@ namespace PaymentComputeApp.WebUI.Extensions
 
         public static void ConfigureService(this IServiceCollection services)
         {
+            services.AddScoped<INIContributionService, NIContributionService>();
             services.AddScoped<ILoan, StudentLoanService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
