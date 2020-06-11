@@ -42,3 +42,4 @@ D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\ne
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\PaymentComputeApp.WebUI.dll
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\PaymentComputeApp.WebUI.pdb
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\PaymentComputeApp.WebUI.genruntimeconfig.cache
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_NotificationPanel.cshtml.g.cs
