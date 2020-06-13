@@ -45,3 +45,6 @@ D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\ne
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\PaymentComputeApp.WebUI.csproj.CoreCompileInputs.cache
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Employee\Index.cshtml.g.cs
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Employee\Create.cshtml.g.cs
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Employee\Edit.cshtml.g.cs
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Employee\Detail.cshtml.g.cs
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Employee\Delete.cshtml.g.cs

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting.Internal;
@@ -85,6 +86,153 @@ namespace PaymentComputeApp.WebUI.Controllers
 
             if (await _unitOfWork.SaveAsync())
                 Alert("Successfully created!", NotificationType.success);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var employee = await _unitOfWork.EmployeeRepository.GetByIdAsync(id);
+
+            if (employee == null)
+                return NotFound();
+
+            var model = new EmployeeEditViewModel()
+            {
+                Id = employee.Id,
+                EmployeeNo = employee.EmployeeNo,
+                FirstName = employee.FirstName,
+                MiddleName = employee.MiddleName,
+                LastName = employee.LastName,
+                Gender = employee.Gender,
+                Email = employee.Email,
+                DOB = employee.DOB,
+                DateJoined = employee.DateJoined,
+                NationalInsuranceNo = employee.NationalInsuranceNo,
+                PaymentMethod = employee.PaymentMethod,
+                StudentLoan = employee.StudentLoan,
+                UnionMember = employee.UnionMember,
+                Address = employee.Address,
+                City = employee.City,
+                Phone = employee.Phone,
+                Postcode = employee.Postcode,
+                Designation = employee.Designation
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(EmployeeEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var employee = await _unitOfWork.EmployeeRepository.GetByIdAsync(model.Id);
+
+            if (employee == null)
+                return NotFound();
+
+            employee.EmployeeNo = model.EmployeeNo;
+            employee.FirstName = model.FirstName;
+            employee.LastName = model.LastName;
+            employee.MiddleName = model.MiddleName;
+            employee.NationalInsuranceNo = model.NationalInsuranceNo;
+            employee.Gender = model.Gender;
+            employee.Email = model.Email;
+            employee.DOB = model.DOB;
+            employee.DateJoined = model.DateJoined;
+            employee.Phone = model.Phone;
+            employee.Designation = model.Designation;
+            employee.PaymentMethod = model.PaymentMethod;
+            employee.StudentLoan = model.StudentLoan;
+            employee.UnionMember = model.UnionMember;
+            employee.Address = model.Address;
+            employee.City = model.City;
+            employee.Postcode = model.Postcode;
+
+            if (model.ImageUrl != null && model.ImageUrl.Length > 0)
+                employee.ImageUrl = await model.ImageUrl.SetImageUrlAsync(_hostingEnvironment);
+
+            _unitOfWork.EmployeeRepository.Update(employee);
+
+            if(await _unitOfWork.SaveAsync())
+                Alert("Successfully edited!", NotificationType.success);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            var employee = await _unitOfWork.EmployeeRepository.GetByIdAsync(id);
+
+            if (employee == null)
+                return NotFound();
+
+            var model = new EmployeeDetailViewModel()
+            {
+                Id = employee.Id,
+                EmployeeNo = employee.EmployeeNo,
+                FirstName = employee.FirstName,
+                MiddleName = employee.MiddleName,
+                LastName = employee.LastName,
+                Gender = employee.Gender,
+                DOB = employee.DOB,
+                DateJoined = employee.DateJoined,
+                Designation = employee.Designation,
+                NationalInsuranceNo = employee.NationalInsuranceNo,
+                Phone = employee.Phone,
+                Email = employee.Email,
+                PaymentMethod = employee.PaymentMethod,
+                StudentLoan = employee.StudentLoan,
+                UnionMember = employee.UnionMember,
+                Address = employee.Address,
+                City = employee.City,
+                ImageUrl = employee.ImageUrl,
+                Postcode = employee.Postcode
+            };
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var employee = await _unitOfWork.EmployeeRepository.GetByIdAsync(id);
+
+            if (employee == null)
+                return NotFound();
+
+            var model = new EmployeeDeleteViewModel()
+            {
+                Id = employee.Id,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(EmployeeDeleteViewModel model)
+        {
+            _unitOfWork.EmployeeRepository.Remove(model.Id);
+            var employee = await _unitOfWork.EmployeeRepository.GetByIdAsync(model.Id);
+
+            if (await _unitOfWork.SaveAsync())
+            {
+                Alert("Successfully deleted!", NotificationType.success);
+
+                var filePath = Path.Combine(_hostingEnvironment.WebRootPath,
+                    employee.ImageUrl.Substring(1, employee.ImageUrl.Length - 1));
+                if (!System.IO.File.Exists(filePath))
+                    return NotFound();
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                System.IO.File.Delete(filePath);
+            }
 
             return RedirectToAction(nameof(Index));
         }
