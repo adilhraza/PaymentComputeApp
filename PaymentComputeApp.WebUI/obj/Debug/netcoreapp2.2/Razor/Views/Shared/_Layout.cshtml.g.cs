@@ -23,13 +23,8 @@ using PaymentComputeApp.WebUI.Models;
 
 #line default
 #line hidden
-#line 3 "D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\Views\_ViewImports.cshtml"
-using PaymentComputeApp.WebUI.Models.Employee;
-
-#line default
-#line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"0a5fa775213737374955e96a97dd06f692c17f88", @"/Views/Shared/_Layout.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a97b3dca6ee84536ae654fc9b9033ca9139215ea", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"18770d24c01ce5aa069ffdc99ad2b3d05525268d", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__Layout : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("href", new global::Microsoft.AspNetCore.Html.HtmlString("~/theme/plugins/fontawesome-free/css/all.min.css"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -83,7 +78,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
             WriteLiteral("<!DOCTYPE html>\r\n<html>\r\n");
             EndContext();
             BeginContext(25, 740, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8811582", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8811398", async() => {
                 BeginContext(31, 121, true);
                 WriteLiteral("\r\n    <meta charset=\"utf-8\" />\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\r\n    <title>");
                 EndContext();
@@ -98,7 +93,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
                 WriteLiteral(" - TaxPaymentApp</title>\r\n    <!-- Font Awesome -->\r\n    ");
                 EndContext();
                 BeginContext(227, 81, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "0a5fa775213737374955e96a97dd06f692c17f8812516", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "0a5fa775213737374955e96a97dd06f692c17f8812332", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -117,7 +112,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
                 WriteLiteral("\r\n    <!-- Ionicons -->\r\n    <link rel=\"stylesheet\" href=\"https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css\">\r\n    <!-- overlayScrollbars -->\r\n    ");
                 EndContext();
                 BeginContext(473, 64, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0a5fa775213737374955e96a97dd06f692c17f8814020", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0a5fa775213737374955e96a97dd06f692c17f8813836", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -136,7 +131,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
                 WriteLiteral("\r\n    <!-- Google Font: Source Sans Pro -->\r\n    <link href=\"https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700\" rel=\"stylesheet\">\r\n    ");
                 EndContext();
                 BeginContext(695, 59, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8815516", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8815332", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -169,7 +164,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(767, 29811, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8817572", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8817388", async() => {
                 BeginContext(810, 607, true);
                 WriteLiteral(@"
     <div class=""wrapper"">
@@ -193,7 +188,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
             ");
                 EndContext();
                 BeginContext(1417, 159, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8818580", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8818396", async() => {
                     BeginContext(1471, 101, true);
                     WriteLiteral("\r\n                <span class=\"brand-text font-weight-light\">Payment Compute App</span>\r\n            ");
                     EndContext();
@@ -215,7 +210,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
                 WriteLiteral("\r\n\r\n            <!-- Sidebar -->\r\n            <div class=\"sidebar\">\r\n                <!-- Sidebar user (optional) -->\r\n                <div class=\"user-panel mt-3 pb-3 mb-3 d-flex\">\r\n                    <div class=\"image\">\r\n                        ");
                 EndContext();
                 BeginContext(1824, 87, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0a5fa775213737374955e96a97dd06f692c17f8820413", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0a5fa775213737374955e96a97dd06f692c17f8820229", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -256,7 +251,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
                 WriteLiteral("nav-treeview\">\r\n                                <li class=\"nav-item\">\r\n                                    ");
                 EndContext();
                 BeginContext(3042, 249, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8823032", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8822848", async() => {
                     BeginContext(3108, 179, true);
                     WriteLiteral("\r\n                                        <i class=\"far fa-circle nav-icon\"></i>\r\n                                        <p>New Employee</p>\r\n                                    ");
                     EndContext();
@@ -281,7 +276,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
                 WriteLiteral("\r\n                                </li>\r\n                                <li class=\"nav-item\">\r\n                                    ");
                 EndContext();
                 BeginContext(3423, 249, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8825119", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8824935", async() => {
                     BeginContext(3488, 180, true);
                     WriteLiteral("\r\n                                        <i class=\"far fa-circle nav-icon\"></i>\r\n                                        <p>All Employees</p>\r\n                                    ");
                     EndContext();
@@ -320,7 +315,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
                                     ");
                 EndContext();
                 BeginContext(4355, 239, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8827765", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8827581", async() => {
                     BeginContext(4416, 174, true);
                     WriteLiteral("\r\n                                        <i class=\"far fa-circle nav-icon\"></i>\r\n                                        <p>New Pay</p>\r\n                                    ");
                     EndContext();
@@ -345,7 +340,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
                 WriteLiteral("\r\n                                </li>\r\n                                <li class=\"nav-item\">\r\n                                    ");
                 EndContext();
                 BeginContext(4726, 246, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8829849", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8829665", async() => {
                     BeginContext(4786, 182, true);
                     WriteLiteral("\r\n                                        <i class=\"far fa-circle nav-icon\"></i>\r\n                                        <p>Payment Records</p>\r\n                                    ");
                     EndContext();
@@ -382,7 +377,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
                                     ");
                 EndContext();
                 BeginContext(5573, 249, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8832417", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8832233", async() => {
                     BeginContext(5636, 182, true);
                     WriteLiteral("\r\n                                        <i class=\"far fa-circle nav-icon\"></i>\r\n                                        <p>Payment Records</p>\r\n                                    ");
                     EndContext();
@@ -407,7 +402,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
                 WriteLiteral("\r\n                                </li>\r\n                            </ul>\r\n                        </li>\r\n                        <li class=\"nav-item has-treeview\">\r\n                            ");
                 EndContext();
                 BeginContext(6017, 375, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8834576", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8834392", async() => {
                     BeginContext(6083, 305, true);
                     WriteLiteral(@"
                                 <i class=""nav-icon fas fa-chart-pie""></i>
@@ -762,7 +757,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
                                     ");
                 EndContext();
                 BeginContext(24122, 231, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8855384", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8855200", async() => {
                     BeginContext(24170, 179, true);
                     WriteLiteral("\r\n                                        <i class=\"far fa-circle nav-icon\"></i>\r\n                                        <p>Starter Page</p>\r\n                                    ");
                     EndContext();
@@ -917,7 +912,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
     ");
                 EndContext();
                 BeginContext(30169, 60, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8863869", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8863685", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -935,7 +930,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
                 WriteLiteral("\r\n    <!-- Bootstrap 4 -->\r\n    ");
                 EndContext();
                 BeginContext(30261, 76, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8865157", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8864973", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -953,7 +948,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
                 WriteLiteral("\r\n    <!-- AdminLTE App -->\r\n    ");
                 EndContext();
                 BeginContext(30370, 55, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8866446", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8866262", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -971,7 +966,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
                 WriteLiteral("\r\n    <!-- AdminLTE for demo purposes -->\r\n    ");
                 EndContext();
                 BeginContext(30472, 47, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8867749", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a5fa775213737374955e96a97dd06f692c17f8867565", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

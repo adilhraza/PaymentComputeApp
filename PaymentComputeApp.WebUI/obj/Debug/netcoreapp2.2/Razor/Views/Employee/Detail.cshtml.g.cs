@@ -23,13 +23,8 @@ using PaymentComputeApp.WebUI.Models;
 
 #line default
 #line hidden
-#line 3 "D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\Views\_ViewImports.cshtml"
-using PaymentComputeApp.WebUI.Models.Employee;
-
-#line default
-#line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"96d08cc12eb4d3dc27c2b8741db117a0b8083327", @"/Views/Employee/Detail.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a97b3dca6ee84536ae654fc9b9033ca9139215ea", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"18770d24c01ce5aa069ffdc99ad2b3d05525268d", @"/Views/_ViewImports.cshtml")]
     public class Views_Employee_Detail : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<EmployeeDetailViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "Home", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -67,7 +62,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
                         <li class=""breadcrumb-item"">");
             EndContext();
             BeginContext(332, 52, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "96d08cc12eb4d3dc27c2b8741db117a0b80833274386", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "96d08cc12eb4d3dc27c2b8741db117a0b80833274202", async() => {
                 BeginContext(376, 4, true);
                 WriteLiteral("Home");
                 EndContext();
@@ -91,7 +86,7 @@ using PaymentComputeApp.WebUI.Models.Employee;
             WriteLiteral("</li>\r\n                        <li class=\"breadcrumb-item\">");
             EndContext();
             BeginContext(443, 39, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "96d08cc12eb4d3dc27c2b8741db117a0b80833276019", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "96d08cc12eb4d3dc27c2b8741db117a0b80833275835", async() => {
                 BeginContext(465, 13, true);
                 WriteLiteral("Employee List");
                 EndContext();

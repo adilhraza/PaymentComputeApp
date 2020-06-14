@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PaymentComputeApp.WebUI.Models.Employee
+namespace PaymentComputeApp.WebUI.Models
 {
-    public class EmployeeCreateViewModel
+    public class EmployeeEditViewModel
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Employee Number is required"),
@@ -28,7 +28,7 @@ namespace PaymentComputeApp.WebUI.Models.Employee
         [DataType(DataType.Date), Display(Name = "Date Of Birth")]
         public DateTime DOB { get; set; }
         [DataType(DataType.Date), Display(Name = "Date Joined")]
-        public DateTime DateJoined { get; set; } = DateTime.UtcNow;
+        public DateTime DateJoined { get; set; }
         public string Phone { get; set; }
         [Required(ErrorMessage = "Job Role is required"), StringLength(100)]
         public string Designation { get; set; }

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using PaymentComputeApp.Core.Services;
 using PaymentComputeApp.DataAccess.Repositories;
 using PaymentComputeApp.Entity.Models;
-using PaymentComputeApp.WebUI.Models.Employee;
+using PaymentComputeApp.WebUI.Models;
 
 namespace PaymentComputeApp.WebUI.Controllers
 {
