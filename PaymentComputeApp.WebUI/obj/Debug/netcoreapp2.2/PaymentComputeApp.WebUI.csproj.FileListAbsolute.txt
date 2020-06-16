@@ -50,3 +50,4 @@ D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\ne
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Employee\Delete.cshtml.g.cs
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Payment\Index.cshtml.g.cs
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Payment\Create.cshtml.g.cs
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Payment\Detail.cshtml.g.cs

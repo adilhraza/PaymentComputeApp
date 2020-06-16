@@ -21,7 +21,7 @@ namespace PaymentComputeApp.DataAccess.Repositories
         public IRepository<Employee> EmployeeRepository
             => _employeeRepo = _employeeRepo ?? new Repository<Employee>(_context);
 
-        public IRepository<PaymentRecord> PaymentRecordRepository
+        public IRepository<PaymentRecord> PaymentRepository
             => _paymentRepo = _paymentRepo ?? new Repository<PaymentRecord>(_context);
 
         public IRepository<TaxYear> TaxYearRepository

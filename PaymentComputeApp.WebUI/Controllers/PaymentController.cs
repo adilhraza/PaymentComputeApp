@@ -31,7 +31,7 @@ namespace PaymentComputeApp.WebUI.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var paymentRecords = (await _unitOfWork.PaymentRecordRepository.GetAsync(includeProperties: "Employee"))
+            var paymentRecords = (await _unitOfWork.PaymentRepository.GetAsync(includeProperties: "Employee"))
                  .Select(payment => new PaymentIndexViewModel()
                  {
                      Id = payment.Id,
@@ -130,12 +130,52 @@ namespace PaymentComputeApp.WebUI.Controllers
                 .TotalDeductuon(tax, nationalInsurance, studentLoan, unionFee);
             paymentRecord.NetPayment = _paymentComputeService.NetPay(totalEarnings, totalDeduction);
 
-            await _unitOfWork.PaymentRecordRepository.AddAsync(paymentRecord);
+            await _unitOfWork.PaymentRepository.AddAsync(paymentRecord);
 
             if (await _unitOfWork.SaveAsync())
                 Alert("Successfully created!", NotificationType.success);
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            var payment = (await _unitOfWork.PaymentRepository
+                .GetAsync(filter: x => x.Id == id, includeProperties: "Employee")).FirstOrDefault();
+
+            if (payment == null)
+                return NotFound();
+
+            var model = new PaymentDetailViewModel()
+            {
+                Id = payment.Id,
+                EmployeeId = payment.Id,
+                FullName = payment.Employee.FirstName + " " + payment.Employee.LastName,
+                NiNo = payment.Employee.NationalInsuranceNo,
+                PayDate = payment.PayDate,
+                PayMonth = payment.PayMonth,
+                TaxCode = payment.TaxCode,
+                TaxYearId = payment.TaxYearId,
+                Year = (await _unitOfWork.TaxYearRepository.GetByIdAsync(payment.TaxYearId)).YearOfTax,
+                HourlyRate = payment.HourlyRate,
+                HoursWorked = payment.HoursWorked,
+                ContractualHours = payment.ContractualHours,
+                OvertimeHours = payment.OvertimeHours,
+                OvertimeRate = _paymentComputeService.OvertimeRate(payment.HourlyRate),
+                ContractualEarnings = payment.ContractualEarnings,
+                OvertimeEarnings = payment.OvertimeEarnings,
+                Tax = payment.Tax,
+                NIC = payment.NIC,
+                UnionFee = payment.UnionFee,
+                SLC = payment.SLC,
+                TotalEarnings = payment.TotalEarnings,
+                TotalDeduction = payment.TotalDeduction,
+                Employee = payment.Employee,
+                TaxYear = payment.TaxYear,
+                NetPayment = payment.NetPayment
+            };
+
+            return View(model);
         }
     }
 }
