@@ -177,5 +177,45 @@ namespace PaymentComputeApp.WebUI.Controllers
 
             return View(model);
         }
+
+        public async Task<IActionResult> Payslip(int id)
+        {
+            var payment = (await _unitOfWork.PaymentRepository
+                .GetAsync(filter: x => x.Id == id, includeProperties: "Employee")).FirstOrDefault();
+
+            if (payment == null)
+                return NotFound();
+
+            var model = new PaymentDetailViewModel()
+            {
+                Id = payment.Id,
+                EmployeeId = payment.Id,
+                FullName = payment.Employee.FirstName + " " + payment.Employee.LastName,
+                NiNo = payment.Employee.NationalInsuranceNo,
+                PayDate = payment.PayDate,
+                PayMonth = payment.PayMonth,
+                TaxCode = payment.TaxCode,
+                TaxYearId = payment.TaxYearId,
+                Year = (await _unitOfWork.TaxYearRepository.GetByIdAsync(payment.TaxYearId)).YearOfTax,
+                HourlyRate = payment.HourlyRate,
+                HoursWorked = payment.HoursWorked,
+                ContractualHours = payment.ContractualHours,
+                OvertimeHours = payment.OvertimeHours,
+                OvertimeRate = _paymentComputeService.OvertimeRate(payment.HourlyRate),
+                ContractualEarnings = payment.ContractualEarnings,
+                OvertimeEarnings = payment.OvertimeEarnings,
+                Tax = payment.Tax,
+                NIC = payment.NIC,
+                UnionFee = payment.UnionFee,
+                SLC = payment.SLC,
+                TotalEarnings = payment.TotalEarnings,
+                TotalDeduction = payment.TotalDeduction,
+                Employee = payment.Employee,
+                TaxYear = payment.TaxYear,
+                NetPayment = payment.NetPayment
+            };
+
+            return View(model);
+        }
     }
 }
