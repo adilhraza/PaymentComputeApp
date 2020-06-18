@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using RotativaCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PaymentComputeApp.Core.Services;
 using PaymentComputeApp.DataAccess.Repositories;
@@ -216,6 +217,16 @@ namespace PaymentComputeApp.WebUI.Controllers
             };
 
             return View(model);
+        }
+
+        public IActionResult GeneratePayslipPdf(int id)
+        {
+            var payslip = new ActionAsPdf("Payslip", new { id = id })
+            {
+                FileName = "payslip.pdf"
+            };
+
+            return payslip;
         }
     }
 }

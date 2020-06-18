@@ -42,7 +42,6 @@ D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\ne
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\PaymentComputeApp.WebUI.pdb
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\PaymentComputeApp.WebUI.genruntimeconfig.cache
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_NotificationPanel.cshtml.g.cs
-D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\PaymentComputeApp.WebUI.csproj.CoreCompileInputs.cache
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Employee\Index.cshtml.g.cs
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Employee\Create.cshtml.g.cs
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Employee\Edit.cshtml.g.cs
@@ -52,3 +51,4 @@ D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\ne
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Payment\Create.cshtml.g.cs
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Payment\Detail.cshtml.g.cs
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Payment\Payslip.cshtml.g.cs
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\PaymentComputeApp.WebUI.csproj.CoreCompileInputs.cache
