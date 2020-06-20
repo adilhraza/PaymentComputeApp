@@ -9,6 +9,7 @@ using PaymentComputeApp.Core.Services;
 using PaymentComputeApp.DataAccess.Repositories;
 using PaymentComputeApp.Entity.Models;
 using PaymentComputeApp.WebUI.Models;
+using PaymentComputeApp.Core.Helpers;
 
 namespace PaymentComputeApp.WebUI.Controllers
 {
@@ -30,7 +31,7 @@ namespace PaymentComputeApp.WebUI.Controllers
             _nIContributionService = nIContributionService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
             var paymentRecords = (await _unitOfWork.PaymentRepository.GetAsync(includeProperties: "Employee"))
                  .Select(payment => new PaymentIndexViewModel()
@@ -48,7 +49,7 @@ namespace PaymentComputeApp.WebUI.Controllers
                      Employee = payment.Employee
                  });
 
-            return View(paymentRecords);
+            return View(PagedList<PaymentIndexViewModel>.Create(paymentRecords, pageNumber ?? 1));
         }
 
         [HttpGet]

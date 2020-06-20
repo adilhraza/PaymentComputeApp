@@ -23,8 +23,13 @@ using PaymentComputeApp.WebUI.Models;
 
 #line default
 #line hidden
+#line 3 "D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\Views\_ViewImports.cshtml"
+using PaymentComputeApp.Core.Helpers;
+
+#line default
+#line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9c714ee1702fbae3d3ce9185d565630f65979dbb", @"/Views/Employee/Delete.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"18770d24c01ce5aa069ffdc99ad2b3d05525268d", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"693bc087f324f5845a8ff13143aa10a57e79e1c3", @"/Views/_ViewImports.cshtml")]
     public class Views_Employee_Delete : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<EmployeeDeleteViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "Home", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -72,7 +77,7 @@ using PaymentComputeApp.WebUI.Models;
                         <li class=""breadcrumb-item"">");
             EndContext();
             BeginContext(330, 52, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c714ee1702fbae3d3ce9185d565630f65979dbb6619", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c714ee1702fbae3d3ce9185d565630f65979dbb6794", async() => {
                 BeginContext(374, 4, true);
                 WriteLiteral("Home");
                 EndContext();
@@ -96,7 +101,7 @@ using PaymentComputeApp.WebUI.Models;
             WriteLiteral("</li>\r\n                        <li class=\"breadcrumb-item\">");
             EndContext();
             BeginContext(441, 39, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c714ee1702fbae3d3ce9185d565630f65979dbb8252", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c714ee1702fbae3d3ce9185d565630f65979dbb8427", async() => {
                 BeginContext(463, 13, true);
                 WriteLiteral("Employee List");
                 EndContext();
@@ -123,12 +128,12 @@ using PaymentComputeApp.WebUI.Models;
                 ");
             EndContext();
             BeginContext(760, 790, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c714ee1702fbae3d3ce9185d565630f65979dbb9915", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c714ee1702fbae3d3ce9185d565630f65979dbb10090", async() => {
                 BeginContext(830, 72, true);
                 WriteLiteral("\r\n                    <div class=\"form-group\">\r\n                        ");
                 EndContext();
                 BeginContext(902, 77, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "9c714ee1702fbae3d3ce9185d565630f65979dbb10371", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "9c714ee1702fbae3d3ce9185d565630f65979dbb10547", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -161,7 +166,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvid
                         ");
                 EndContext();
                 BeginContext(1254, 145, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c714ee1702fbae3d3ce9185d565630f65979dbb12688", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c714ee1702fbae3d3ce9185d565630f65979dbb12864", async() => {
                     BeginContext(1324, 71, true);
                     WriteLiteral("<i class=\"fas fa-caret-square-left\" style=\"margin-right:0.7em\"></i>Back");
                     EndContext();

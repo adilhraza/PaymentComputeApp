@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.Mvc;
+using PaymentComputeApp.Core.Helpers;
 using PaymentComputeApp.Core.Services;
 using PaymentComputeApp.DataAccess.Repositories;
 using PaymentComputeApp.Entity.Models;
@@ -24,7 +25,7 @@ namespace PaymentComputeApp.WebUI.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
             var employees = (await _unitOfWork.EmployeeRepository.GetAllAsync())
                 .Select(employee => new EmployeeIndexViewModel
@@ -40,7 +41,7 @@ namespace PaymentComputeApp.WebUI.Controllers
                     City = employee.City
                 });
 
-            return View(employees);
+            return View(PagedList<EmployeeIndexViewModel>.Create(employees, pageNumber ?? 1));
         }
 
         [HttpGet]

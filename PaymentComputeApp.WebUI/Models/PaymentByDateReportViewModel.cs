@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PaymentComputeApp.Core.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,6 +13,6 @@ namespace PaymentComputeApp.WebUI.Models
         public DateTime DateFrom { get; set; }
         [DataType(DataType.Date), Display(Name = "Date To")]
         public DateTime DateTo { get; set; }
-        public IEnumerable<PaymentIndexViewModel> Payments { get; set; }
+        public PagedList<PaymentIndexViewModel> Payments { get; set; }
     }
 }

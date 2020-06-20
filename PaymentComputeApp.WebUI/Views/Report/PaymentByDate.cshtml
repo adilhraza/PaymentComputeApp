@@ -14,7 +14,7 @@
                     </ol>
                 </nav><br /><br />
 
-                <form method="post">
+                <form method="get">
                     <div class="form-row">
                         <div class="form-group col-md-1 font-weight-bold pt-1">
                             <label asp-for="DateFrom"></label>
@@ -37,33 +37,33 @@
                 <hr />
 
 
-                @if (Model.Payments != null && Model.Payments.Count()>0)
+                @if (Model.Payments != null && Model.Payments.Count() > 0)
                 {
-                    <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="dataTables_wrapper dt-bootstrap4">
                         <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
                             <div class="col-sm-12">
-                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                <table class="table table-bordered table-hover dataTable" role="grid">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending">
+                                            <th rowspan="1" colspan="1">
                                                 Employee
                                             </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
+                                            <th rowspan="1" colspan="1">
                                                 Pay Date
                                             </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
+                                            <th rowspan="1" colspan="1">
                                                 Month
                                             </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
+                                            <th rowspan="1" colspan="1">
                                                 Tax Year
                                             </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
+                                            <th rowspan="1" colspan="1">
                                                 Total Earnings
                                             </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
+                                            <th rowspan="1" colspan="1">
                                                 Total Deductions
                                             </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
+                                            <th rowspan="1" colspan="1">
                                                 Net Payment
                                             </th>
                                         </tr>
@@ -86,10 +86,35 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="example2_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                            </div><div class="col-sm-12 col-md-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                                    <ul class="pagination">
+                                        <li class="paginate_button page-item previous disabled" id="example2_previous">
+                                            <!-- <a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>-->
+                                            <a asp-action="Index" asp-route-pageNumber="@(Model.Payments.CurrentPage-1)" class="page-link">Previous</a>
+                                        </li>
+                                        <li class="paginate_button page-item active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                                        <li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                                        <li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
+                                        <li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
+                                        <li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
+                                        <li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
+                                        <li class="paginate_button page-item next" id="example2_next">
+                                            <!--<a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a>-->
+                                            <a asp-action="Index" asp-route-pageNumber="@(Model.Payments.CurrentPage+1)" class="page-link">Next</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 }
-                </div>
+            </div>
         </div>
     </div>
 </div>
