@@ -13,7 +13,7 @@ namespace PaymentComputeApp.WebUI.Controllers
     public class ReportController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-       
+        private PaymentByDateReportViewModel model;
 
         public ReportController(IUnitOfWork unitOfWork)
         {
@@ -52,7 +52,7 @@ namespace PaymentComputeApp.WebUI.Controllers
                 });
 
 
-            PaymentByDateReportViewModel model = new PaymentByDateReportViewModel()
+            model = new PaymentByDateReportViewModel()
             {
                 DateFrom = DateTime.Now,
                 DateTo = DateTime.Now,
@@ -60,6 +60,43 @@ namespace PaymentComputeApp.WebUI.Controllers
             };
 
             return View(model);
+        }
+
+        public async Task<IActionResult> EmployeeByName(string searchField)
+        {
+            var employees = (await _unitOfWork.EmployeeRepository.GetAllAsync())
+                .Select(employee => new EmployeeIndexViewModel
+                {
+                    Id = employee.Id,
+                    EmployeeNo = employee.EmployeeNo,
+                    FirstName = employee.FirstName,
+                    LastName = employee.LastName,
+                    Gender = employee.Gender,
+                    ImageUrl = employee.ImageUrl,
+                    DateJoined = employee.DateJoined,
+                    Designation = employee.Designation,
+                    City = employee.City
+                }); 
+
+            if (!String.IsNullOrEmpty(searchField))
+            {
+                employees = (await _unitOfWork.EmployeeRepository.GetAsync(x => x.FirstName.Contains(searchField) 
+                    || x.LastName.Contains(searchField)))
+                    .Select(employee => new EmployeeIndexViewModel
+                    {
+                        Id = employee.Id,
+                        EmployeeNo = employee.EmployeeNo,
+                        FirstName = employee.FirstName,
+                        LastName = employee.LastName,
+                        Gender = employee.Gender,
+                        ImageUrl = employee.ImageUrl,
+                        DateJoined = employee.DateJoined,
+                        Designation = employee.Designation,
+                        City = employee.City
+                    }); 
+            }
+            
+            return View(employees);
         }
     }
 }
