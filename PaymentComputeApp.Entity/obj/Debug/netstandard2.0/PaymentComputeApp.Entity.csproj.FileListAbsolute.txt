@@ -6,4 +6,3 @@ D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.Entity\obj\Debug\n
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.Entity\bin\Debug\netstandard2.0\PaymentComputeApp.Entity.pdb
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.Entity\obj\Debug\netstandard2.0\PaymentComputeApp.Entity.dll
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.Entity\obj\Debug\netstandard2.0\PaymentComputeApp.Entity.pdb
-D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.Entity\obj\Debug\netstandard2.0\PaymentComputeApp.Entity.csprojAssemblyReference.cache

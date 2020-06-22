@@ -32,7 +32,7 @@ namespace PaymentComputeApp.WebUI.Controllers
         }*/
 
      //   [HttpPost]
-        public async Task<IActionResult> PaymentByDate(PaymentByDateReportViewModel paymentReportModel, int pageNumber)
+        public async Task<IActionResult> PaymentByDate(PaymentByDateReportViewModel paymentReportModel, int pageNumber=1)
         {
             var paymentsRepo = (await _unitOfWork.PaymentRepository.GetAsync(includeProperties: "Employee",
                 filter: x => x.PayDate >= paymentReportModel.DateFrom && x.PayDate <= paymentReportModel.DateTo))
@@ -62,7 +62,7 @@ namespace PaymentComputeApp.WebUI.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> EmployeeByName(string searchField)
+        public async Task<IActionResult> EmployeeByName(string searchField, int pageNumber=1)
         {
             var employees = (await _unitOfWork.EmployeeRepository.GetAllAsync())
                 .Select(employee => new EmployeeIndexViewModel
@@ -95,8 +95,10 @@ namespace PaymentComputeApp.WebUI.Controllers
                         City = employee.City
                     }); 
             }
-            
-            return View(employees);
+
+            ViewData["searchField"] = searchField;
+
+            return View(PagedList<EmployeeIndexViewModel>.Create(employees, pageNumber,2));
         }
     }
 }
