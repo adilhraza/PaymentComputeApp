@@ -13,6 +13,9 @@
                 </nav>
 
                 <br /><br />
+                <div class="text-right" style="overflow:hidden;position:absolute;padding:1px 0px 0px 0px;right: 20px;">
+                    <button type="button" class="btn btn-info" onclick="location.href='@Url.Action("ExportToExcel", "Report")'">Export To Excel</button>
+                </div>
 
                 @using (Html.BeginForm())
                 {
