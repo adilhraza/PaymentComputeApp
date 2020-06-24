@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OfficeOpenXml;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.DateTime;
 using PaymentComputeApp.Core.Helpers;
 using PaymentComputeApp.DataAccess.Repositories;
 using PaymentComputeApp.WebUI.Models;
@@ -15,29 +16,16 @@ namespace PaymentComputeApp.WebUI.Controllers
     public class ReportController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        private PaymentByDateReportViewModel model;
 
         public ReportController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-       /* public async Task<IActionResult> PaymentByDate()
+        public async Task<IActionResult> PaymentByDate(DateTime dateFrom, DateTime dateTo, int? pageNumber)
         {
-            PaymentByDateReportViewModel model = new PaymentByDateReportViewModel()
-            {
-                DateFrom = DateTime.Now,
-                DateTo = DateTime.Now,
-            };
-
-            return View(model);
-        }*/
-
-     //   [HttpPost]
-        public async Task<IActionResult> PaymentByDate(PaymentByDateReportViewModel paymentReportModel, int pageNumber=1)
-        {
-            var paymentsRepo = (await _unitOfWork.PaymentRepository.GetAsync(includeProperties: "Employee",
-                filter: x => x.PayDate >= paymentReportModel.DateFrom && x.PayDate <= paymentReportModel.DateTo))
+            var payments = (await _unitOfWork.PaymentRepository.GetAsync(includeProperties: "Employee",
+                filter: x => x.PayDate >= dateFrom && x.PayDate <= dateTo))
                 .Select(payment => new PaymentIndexViewModel()
                 {
                     Id = payment.Id,
@@ -53,75 +41,47 @@ namespace PaymentComputeApp.WebUI.Controllers
                     Employee = payment.Employee
                 });
 
-
-            model = new PaymentByDateReportViewModel()
-            {
-                DateFrom = DateTime.Now,
-                DateTo = DateTime.Now,
-                Payments = PagedList<PaymentIndexViewModel>.Create(paymentsRepo, pageNumber)
-            };
-
-            return View(model);
+            return View(PagedList<PaymentIndexViewModel>.Create(payments, pageNumber ?? 1));
         }
 
-        public async Task<IActionResult> EmployeeByName(string searchField, int pageNumber=1)
+        public async Task<IActionResult> EmployeeByName(string searchField, int? pageNumber)
         {
-            var employees = (await _unitOfWork.EmployeeRepository.GetAllAsync())
-                .Select(employee => new EmployeeIndexViewModel
-                {
-                    Id = employee.Id,
-                    EmployeeNo = employee.EmployeeNo,
-                    FirstName = employee.FirstName,
-                    LastName = employee.LastName,
-                    Gender = employee.Gender,
-                    ImageUrl = employee.ImageUrl,
-                    DateJoined = employee.DateJoined,
-                    Designation = employee.Designation,
-                    City = employee.City
-                }); 
-
-            if (!String.IsNullOrEmpty(searchField))
-            {
-                employees = (await _unitOfWork.EmployeeRepository.GetAsync(x => x.FirstName.Contains(searchField) 
-                    || x.LastName.Contains(searchField)))
-                    .Select(employee => new EmployeeIndexViewModel
-                    {
-                        Id = employee.Id,
-                        EmployeeNo = employee.EmployeeNo,
-                        FirstName = employee.FirstName,
-                        LastName = employee.LastName,
-                        Gender = employee.Gender,
-                        ImageUrl = employee.ImageUrl,
-                        DateJoined = employee.DateJoined,
-                        Designation = employee.Designation,
-                        City = employee.City
-                    }); 
-            }
+            var employees = await GetEmployeesByName(searchField);
 
             ViewData["searchField"] = searchField;
 
-            return View(PagedList<EmployeeIndexViewModel>.Create(employees, pageNumber));
+            return View(PagedList<EmployeeIndexViewModel>.Create(employees, pageNumber ?? 1));
         }
 
-        public async Task<IActionResult> ExportToExcel()
+        public async Task<IActionResult> PaymentByTotalEarnings(decimal totalEarnings, int? pageNumber)
         {
-            byte[] fileContents;
-            var employees = (await _unitOfWork.EmployeeRepository.GetAllAsync())
-                .Select(employee => new EmployeeIndexViewModel
+            var payments = (await _unitOfWork.PaymentRepository.GetAsync(includeProperties: "Employee",
+                filter: x => x.TotalEarnings >= totalEarnings))
+                .Select(payment => new PaymentIndexViewModel()
                 {
-                    Id = employee.Id,
-                    EmployeeNo = employee.EmployeeNo,
-                    FirstName = employee.FirstName,
-                    LastName = employee.LastName,
-                    Gender = employee.Gender,
-                    ImageUrl = employee.ImageUrl,
-                    DateJoined = employee.DateJoined,
-                    Designation = employee.Designation,
-                    City = employee.City
+                    Id = payment.Id,
+                    EmployeeId = payment.EmployeeId,
+                    FullName = payment.Employee.FirstName + " " + payment.Employee.LastName,
+                    PayDate = payment.PayDate,
+                    PayMonth = payment.PayMonth,
+                    TaxYearId = payment.TaxYearId,
+                    Year = _unitOfWork.TaxYearRepository.GetById(payment.TaxYearId).YearOfTax,
+                    TotalEarnings = payment.TotalEarnings,
+                    TotalDeduction = payment.TotalDeduction,
+                    NetPayment = payment.NetPayment,
+                    Employee = payment.Employee
                 });
 
+            return View(PagedList<PaymentIndexViewModel>.Create(payments, pageNumber ?? 1));
+        }
+
+        public async Task<IActionResult> EmployeeExportToExcel(string searchField)
+        {
+            byte[] fileContents;
+            var employees = await GetEmployeesByName(searchField);
+
             ExcelPackage Ep = new ExcelPackage();
-            ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("EmployeeInfo");
+            ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("Employee_Info");
             Sheet.Cells["A1"].Value = "Employee No.";
             Sheet.Cells["B1"].Value = "First Name";
             Sheet.Cells["C1"].Value = "Last Name";
@@ -159,5 +119,47 @@ namespace PaymentComputeApp.WebUI.Controllers
                 fileDownloadName: "Employee.xlsx"
             );
         }
+
+        private async Task<IEnumerable<EmployeeIndexViewModel>> GetEmployeesByName(string searchField)
+        {
+            IEnumerable<EmployeeIndexViewModel> employees;
+
+            if (!String.IsNullOrEmpty(searchField))
+            {
+                employees = (await _unitOfWork.EmployeeRepository.GetAsync(x => x.FirstName.Contains(searchField)
+                    || x.LastName.Contains(searchField)))
+                .Select(employee => new EmployeeIndexViewModel
+                {
+                    Id = employee.Id,
+                    EmployeeNo = employee.EmployeeNo,
+                    FirstName = employee.FirstName,
+                    LastName = employee.LastName,
+                    Gender = employee.Gender,
+                    ImageUrl = employee.ImageUrl,
+                    DateJoined = employee.DateJoined,
+                    Designation = employee.Designation,
+                    City = employee.City
+                });
+            }
+            else
+            {
+                employees = (await _unitOfWork.EmployeeRepository.GetAllAsync())
+                .Select(employee => new EmployeeIndexViewModel
+                {
+                    Id = employee.Id,
+                    EmployeeNo = employee.EmployeeNo,
+                    FirstName = employee.FirstName,
+                    LastName = employee.LastName,
+                    Gender = employee.Gender,
+                    ImageUrl = employee.ImageUrl,
+                    DateJoined = employee.DateJoined,
+                    Designation = employee.Designation,
+                    City = employee.City
+                });
+            }
+
+            return employees;
+        }
+
     }
 }
