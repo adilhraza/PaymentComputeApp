@@ -21,11 +21,62 @@ namespace PaymentComputeApp.WebUI.Controllers
         {
             _unitOfWork = unitOfWork;
         }
+        public async Task<IActionResult> EmployeeByName(string searchField, int? pageNumber)
+        {
+            var employees = await GetEmployeesByName(searchField);
 
-        public async Task<IActionResult> PaymentByDate(DateTime dateFrom, DateTime dateTo, int? pageNumber)
+            ViewData["searchField"] = searchField;
+
+            return View(PagedList<EmployeeIndexViewModel>.Create(employees, pageNumber ?? 1));
+        }
+
+        public async Task<IActionResult> EmployeeByCity(string city, int? pageNumber)
+        {
+            IEnumerable<EmployeeIndexViewModel> employees;
+
+            if (!String.IsNullOrEmpty(city))
+            {
+                employees = (await _unitOfWork.EmployeeRepository.GetAsync(x => x.City.Contains(city)
+                    || x.City.Contains(city)))
+                .Select(employee => new EmployeeIndexViewModel
+                {
+                    Id = employee.Id,
+                    EmployeeNo = employee.EmployeeNo,
+                    FirstName = employee.FirstName,
+                    LastName = employee.LastName,
+                    Gender = employee.Gender,
+                    ImageUrl = employee.ImageUrl,
+                    DateJoined = employee.DateJoined,
+                    Designation = employee.Designation,
+                    City = employee.City
+                });
+            }
+            else
+            {
+                employees = (await _unitOfWork.EmployeeRepository.GetAllAsync())
+                .Select(employee => new EmployeeIndexViewModel
+                {
+                    Id = employee.Id,
+                    EmployeeNo = employee.EmployeeNo,
+                    FirstName = employee.FirstName,
+                    LastName = employee.LastName,
+                    Gender = employee.Gender,
+                    ImageUrl = employee.ImageUrl,
+                    DateJoined = employee.DateJoined,
+                    Designation = employee.Designation,
+                    City = employee.City
+                });
+            }
+
+            ViewData["city"] = city;
+
+            return View(PagedList<EmployeeIndexViewModel>.Create(employees, pageNumber ?? 1));
+        }
+
+        public async Task<IActionResult> PaymentByDate(string dateFrom, string dateTo, int? pageNumber)
         {
             var payments = (await _unitOfWork.PaymentRepository.GetAsync(includeProperties: "Employee",
-                filter: x => x.PayDate >= dateFrom && x.PayDate <= dateTo))
+                filter: x => x.PayDate >= Convert.ToDateTime(dateFrom) && x.PayDate <= Convert.ToDateTime(dateTo)))
                 .Select(payment => new PaymentIndexViewModel()
                 {
                     Id = payment.Id,
@@ -41,16 +92,10 @@ namespace PaymentComputeApp.WebUI.Controllers
                     Employee = payment.Employee
                 });
 
+            ViewData["dateFrom"] = dateFrom;
+            ViewData["dateTo"] = dateTo;
+
             return View(PagedList<PaymentIndexViewModel>.Create(payments, pageNumber ?? 1));
-        }
-
-        public async Task<IActionResult> EmployeeByName(string searchField, int? pageNumber)
-        {
-            var employees = await GetEmployeesByName(searchField);
-
-            ViewData["searchField"] = searchField;
-
-            return View(PagedList<EmployeeIndexViewModel>.Create(employees, pageNumber ?? 1));
         }
 
         public async Task<IActionResult> PaymentByTotalEarnings(decimal totalEarnings, int? pageNumber)
@@ -71,6 +116,8 @@ namespace PaymentComputeApp.WebUI.Controllers
                     NetPayment = payment.NetPayment,
                     Employee = payment.Employee
                 });
+
+            ViewData["totalEarnings"] = totalEarnings;
 
             return View(PagedList<PaymentIndexViewModel>.Create(payments, pageNumber ?? 1));
         }
