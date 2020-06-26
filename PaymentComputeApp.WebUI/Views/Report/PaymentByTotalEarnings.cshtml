@@ -105,7 +105,7 @@
                             {
                                 var disabledButton = (i != Model.CurrentPage) ? "" : "disabled";
                                 <li class="paginate_button page-item @disabledButton">
-                                    <a asp-action="PaymentByDate"
+                                    <a asp-action="PaymentByTotalEarnings"
                                        asp-route-totalEarnings="@ViewData["totalEarnings"]"
                                        asp-route-pageNumber="@i" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">@i</a>
                                 </li>

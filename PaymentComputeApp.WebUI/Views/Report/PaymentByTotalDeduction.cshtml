@@ -1,0 +1,136 @@
+﻿@model PagedList<PaymentIndexViewModel>
+
+@{
+    ViewData["Title"] = "PaymentByTotalDeduction";
+}
+
+<div class="content-wrapper">
+    <div class="col-md-12 grid-margin stretch-card pt-2">
+        <div class="card">
+            <div class="card-body">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Payment report</li>
+                    </ol>
+                </nav><br /><br />
+
+
+                @using (Html.BeginForm())
+                {
+            <div class="form-row">
+                <div class="form-group col-md-1 font-weight-bold pt-1">
+                    <label>Amount From: </label>
+                </div>
+                <div class="form-group col-md-3 font-italic font-weight-bolder">
+                    @Html.TextBox("fromDeduction", null, new { @class = "form-control" })
+                </div>
+                <div class="form-group col-md-1 font-weight-bold pt-1">
+                    <label>Amount To: </label>
+                </div>
+                <div class="form-group col-md-3 font-italic font-weight-bolder">
+                    @Html.TextBox("toDeduction", null, new { @class = "form-control" })
+                </div>
+                <div class="form-group col-md-3 font-italic font-weight-bolder">
+                    <input type="submit" class="btn btn-info" value="Search" />
+                </div>
+            </div>
+                }
+
+                <hr />
+
+
+                @if (Model != null && Model.Count() > 0)
+                {
+                    <div class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered table-hover dataTable" role="grid">
+                                    <thead>
+                                        <tr role="row">
+                                            <th rowspan="1" colspan="1">
+                                                Employee
+                                            </th>
+                                            <th rowspan="1" colspan="1">
+                                                Payment Date
+                                            </th>
+                                            <th rowspan="1" colspan="1">
+                                                Month
+                                            </th>
+                                            <th rowspan="1" colspan="1">
+                                                Tax Year
+                                            </th>
+                                            <th rowspan="1" colspan="1">
+                                                Total Earnings
+                                            </th>
+                                            <th rowspan="1" colspan="1">
+                                                Total Deductions
+                                            </th>
+                                            <th rowspan="1" colspan="1">
+                                                Net Payment
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr role="row" class="odd">
+                                                <td>@item.FullName</td>
+                                                <td>@item.PayDate.ToString("dd/MM/yyyy")</td>
+                                                <td>@item.PayMonth</td>
+                                                <td>@item.Year</td>
+                                                <td>@item.TotalEarnings.ToString("C")</td>
+                                                <td>@item.TotalDeduction.ToString("c")</td>
+                                                <td>@item.NetPayment.ToString("C")</td>
+                                            </tr>
+                                        }
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    var disabledPrevious = Model.CurrentPage > 1 ? "" : "disabled";
+                    var disabledNext = Model.CurrentPage < Model.TotalPages ? "" : "disabled";
+
+
+
+                    <ul class="pagination">
+                        <li class="paginate_button page-item previous @disabledPrevious">
+                            <a asp-action="PaymentByTotalDeduction"
+                               asp-route-fromDeduction="@ViewData["fromDeduction"]"
+                               asp-route-toDeduction="@ViewData["toDeduction"]"
+                               asp-route-pageNumber="@(Model.CurrentPage-1)"
+                               class="page-link">Previous</a>
+                        </li>
+                        @for (int i = 1; i <= Model.TotalPages; i++)
+                        {
+                            var disabledButton = (i != Model.CurrentPage) ? "" : "disabled";
+                            <li class="paginate_button page-item @disabledButton">
+                                <a asp-action="PaymentByTotalDeduction"
+                                   asp-route-fromDeduction="@ViewData["fromDeduction"]"
+                                   asp-route-toDeduction="@ViewData["toDeduction"]"
+                                   asp-route-pageNumber="@i" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">@i</a>
+                            </li>
+                        }
+
+
+                        <li class="paginate_button page-item next @disabledNext">
+                            <a asp-action="PaymentByTotalDeduction"
+                               asp-route-fromDeduction="@ViewData["fromDeduction"]"
+                               asp-route-toDeduction="@ViewData["toDeduction"]"
+                               asp-route-pageNumber="@(Model.CurrentPage+1)"
+                               class="page-link">Next</a>
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

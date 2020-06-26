@@ -56,3 +56,4 @@ D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\ne
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\PaymentComputeApp.WebUI.csproj.CoreCompileInputs.cache
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Report\PaymentByTotalEarnings.cshtml.g.cs
 D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Report\EmployeeByCity.cshtml.g.cs
+D:\Projects\ASP .NET Core\PaymentComputeApp\PaymentComputeApp.WebUI\obj\Debug\netcoreapp2.2\Razor\Views\Report\PaymentByTotalDeduction.cshtml.g.cs

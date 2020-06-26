@@ -122,6 +122,31 @@ namespace PaymentComputeApp.WebUI.Controllers
             return View(PagedList<PaymentIndexViewModel>.Create(payments, pageNumber ?? 1));
         }
 
+        public async Task<IActionResult> PaymentByTotalDeduction(decimal fromDeduction, decimal toDeduction, int? pageNumber)
+        {
+            var payments = (await _unitOfWork.PaymentRepository.GetAsync(includeProperties: "Employee",
+                filter: x => x.TotalDeduction >= fromDeduction && x.TotalDeduction <= toDeduction))
+                .Select(payment => new PaymentIndexViewModel()
+                {
+                    Id = payment.Id,
+                    EmployeeId = payment.EmployeeId,
+                    FullName = payment.Employee.FirstName + " " + payment.Employee.LastName,
+                    PayDate = payment.PayDate,
+                    PayMonth = payment.PayMonth,
+                    TaxYearId = payment.TaxYearId,
+                    Year = _unitOfWork.TaxYearRepository.GetById(payment.TaxYearId).YearOfTax,
+                    TotalEarnings = payment.TotalEarnings,
+                    TotalDeduction = payment.TotalDeduction,
+                    NetPayment = payment.NetPayment,
+                    Employee = payment.Employee
+                });
+
+            ViewData["fromDeduction"] = fromDeduction;
+            ViewData["toDeduction"] = toDeduction;
+
+            return View(PagedList<PaymentIndexViewModel>.Create(payments, pageNumber ?? 1));
+        }
+
         public async Task<IActionResult> EmployeeExportToExcel(string searchField)
         {
             byte[] fileContents;
