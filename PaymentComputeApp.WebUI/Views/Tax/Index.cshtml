@@ -1,0 +1,54 @@
+﻿@model IEnumerable<TaxYearIndexViewModel>
+
+@{
+    ViewData["Title"] = "Tax Records";
+}
+
+<div class="content-wrapper">
+    <div class="col-md-12 grid-margin pt-2">
+        <div class="card">
+            <div class="card-body">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Tax Records</li>
+                    </ol>
+                </nav><br /><br />
+                <div class="row">
+                    <div class="col-md-12 table-responsive-md">
+                        <a class="btn btn-outline-success float-md-right mb-2" asp-action="Create"> New Year</a>
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Tax Year</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.YearOfTax
+                                        </td>
+                                        <td>
+                                            <a asp-action="Detail" asp-route-id="@item.Id" class="btn btn-danger">
+                                                Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <br />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
