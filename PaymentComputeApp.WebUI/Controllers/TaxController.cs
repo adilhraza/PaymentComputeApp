@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using PaymentComputeApp.DataAccess.Repositories;
+using PaymentComputeApp.Entity.Models;
 using PaymentComputeApp.WebUI.Models;
 
 namespace PaymentComputeApp.WebUI.Controllers
 {
-    public class TaxController : Controller
+    public class TaxController : BaseController
     {
         private IUnitOfWork _unitOfWork;
 
@@ -27,6 +29,36 @@ namespace PaymentComputeApp.WebUI.Controllers
                 });
 
             return View(taxYears);
+        }
+
+        public async Task<IActionResult> Create()
+        {
+            var model = new TaxYearCreateViewModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(TaxYearCreateViewModel model)
+        {
+            var taxYearRepo = _unitOfWork.TaxYearRepository.Find(x => x.YearOfTax == model.YearOfTax);
+            
+            if(taxYearRepo!=null)
+                Alert("Tax year already exist!", NotificationType.error);
+
+            var taxYear = new TaxYear()
+            {
+                Id = model.Id,
+                YearOfTax = model.YearOfTax
+            };
+
+            await _unitOfWork.TaxYearRepository.AddAsync(taxYear);
+
+            if(await _unitOfWork.SaveAsync())
+                Alert("Successfully created!", NotificationType.success);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
