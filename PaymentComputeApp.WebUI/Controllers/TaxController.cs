@@ -60,5 +60,18 @@ namespace PaymentComputeApp.WebUI.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var taxYear = await _unitOfWork.TaxYearRepository.GetByIdAsync(id);
+            if (taxYear == null)
+                return NotFound();
+
+            _unitOfWork.TaxYearRepository.Remove(taxYear);
+            if(await _unitOfWork.SaveAsync())
+                Alert("Successfully deleted!", NotificationType.success);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
