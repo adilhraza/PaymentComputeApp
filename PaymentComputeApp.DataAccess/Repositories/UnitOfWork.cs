@@ -9,7 +9,7 @@ namespace PaymentComputeApp.DataAccess.Repositories
     public class UnitOfWork:IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
-        private IRepository<Employee> _employeeRepo;
+        private IEmployeeRepository _employeeRepo;
         private IRepository<PaymentRecord> _paymentRepo;
         private IRepository<TaxYear> _taxYear;
 
@@ -18,8 +18,8 @@ namespace PaymentComputeApp.DataAccess.Repositories
             _context = context;
         }
 
-        public IRepository<Employee> EmployeeRepository
-            => _employeeRepo = _employeeRepo ?? new Repository<Employee>(_context);
+        public IEmployeeRepository EmployeeRepository
+            => _employeeRepo = _employeeRepo ?? new EmployeeRepository(_context);
 
         public IRepository<PaymentRecord> PaymentRepository
             => _paymentRepo = _paymentRepo ?? new Repository<PaymentRecord>(_context);

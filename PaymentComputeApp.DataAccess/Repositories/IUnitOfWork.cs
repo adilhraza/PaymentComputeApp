@@ -10,7 +10,7 @@ namespace PaymentComputeApp.DataAccess.Repositories
     {
         IRepository<TaxYear> TaxYearRepository { get; }
         IRepository<PaymentRecord> PaymentRepository { get; }
-        IRepository<Employee> EmployeeRepository { get; }
+        IEmployeeRepository EmployeeRepository { get; }
         Task<bool> SaveAsync();
     }
 }
