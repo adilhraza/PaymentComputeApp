@@ -13,7 +13,22 @@
                     </ol>
                 </nav><br /><br />
 
-                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                <div class="card" style="width: 40%;">
+                    <div class="card-header">
+                        Featured
+                    </div>
+                        <div id="chartContainerCity" style="height: 370px; width: 100%;"></div>
+                </div>
+
+                <div class="card" style="width: 40%;">
+                    <div class="card-header">
+                        Featured
+                    </div>
+                        <div id="chartContainerYear" style="height: 370px; width: 100%;"></div>
+                </div>
+
+
+
                 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
                 <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
             </div>
@@ -25,23 +40,44 @@
 <script>
     window.onload = function () {
 
-    var chart = new CanvasJS.Chart("chartContainer", {
-	    theme: "light2", // "light1", "light2", "dark1", "dark2"
-	    exportEnabled: true,
-	    animationEnabled: true,
-	    title: {
-		    text: "Automotive Semiconductor Vendors 2015",
-		    fontSize: 21
-	    },
-	    data: [{
-		    type: "pie",
-		    startAngle: 160,
-		    toolTipContent: "<b>{label}</b>: {y}%",
-		    indexLabel: "{label} - {y}%",
-		    dataPoints: @Html.Raw(ViewBag.DataPoints)
-	    }]
-    });
-    chart.render();
+        var chart = new CanvasJS.Chart("chartContainerCity", {
+			theme: "light2", // "light1", "light2", "dark1", "dark2"
+			exportEnabled: true,
+			animationEnabled: true,
+			title: {
+				text: "Employee by City",
+				fontSize: 21
+			},
+			data: [{
+				type: "pie",
+				startAngle: 160,
+				toolTipContent: "<b>{label}</b>: {y}%",
+				indexLabel: "{label} - {y}%",
+				dataPoints: @Html.Raw(ViewBag.DataPointsCity)
+			}]
+		});
+		chart.render();
 
     }
+</script>
+
+
+<script>
+	window.onload = function () {
+
+        var chart = new CanvasJS.Chart("chartContainerYear", {
+			animationEnabled: true,
+			theme: "light2", // "light1", "dark1", "dark2"
+			exportEnabled: true,
+			title: {
+				text: "AVG (Total Earnings) By Year"
+			},
+			data: [{
+				type: "column",
+				dataPoints:  @Html.Raw(ViewBag.DataPointsYear)
+			}]
+		});
+		chart.render();
+
+	}
 </script>

@@ -14,7 +14,7 @@ namespace PaymentComputeApp.DataAccess.Repositories
 
         public IEnumerable<EmployeeCity> CountEmployeeByCity()
         {
-            return _context.EmployeeCity.FromSql("SELECT City, Count(*) AS CountCity FROM Employees GROUP BY City").ToList();//_context.Query<EmployeeCity>().FromSql("SELECT City, Count(*) FROM Employees GROUP BY City").ToList();
+            return _context.EmployeeCity.FromSql("SELECT City, Count(*) AS CountCity FROM Employees GROUP BY City").ToList();
         }
     }
 }

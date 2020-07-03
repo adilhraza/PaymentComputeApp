@@ -29,7 +29,19 @@ namespace PaymentComputeApp.WebUI.Controllers
                 dataPoints.Add(new DataPoint(city.City, city.CountCity));
             }
 
-            ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+            ViewBag.DataPointsCity = JsonConvert.SerializeObject(dataPoints);
+
+            dataPoints.Clear();
+
+            var totalEarningsYear = _unitOfWork.PaymentRepository.TotalEarningsByYear();
+
+            foreach (var year in totalEarningsYear)
+            {
+                dataPoints.Add(new DataPoint(year.YearOfPayment.ToString(), Convert.ToDouble(year.AvgTotalEarnings)));
+            }
+
+            ViewBag.DataPointsYear = JsonConvert.SerializeObject(dataPoints);
+
             return View();
         }
     }

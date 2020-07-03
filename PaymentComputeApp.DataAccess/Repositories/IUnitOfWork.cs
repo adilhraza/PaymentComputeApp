@@ -9,7 +9,7 @@ namespace PaymentComputeApp.DataAccess.Repositories
     public interface IUnitOfWork:IDisposable
     {
         IRepository<TaxYear> TaxYearRepository { get; }
-        IRepository<PaymentRecord> PaymentRepository { get; }
+        IPaymentRepository PaymentRepository { get; }
         IEmployeeRepository EmployeeRepository { get; }
         Task<bool> SaveAsync();
     }
