@@ -13,20 +13,51 @@
                     </ol>
                 </nav><br /><br />
 
-                <div class="card" style="width: 40%;">
-                    <div class="card-header">
-                        Featured
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Employee By City</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chartContainerCity" style="height: 370px; width: 100%;"></div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
                     </div>
-                        <div id="chartContainerCity" style="height: 370px; width: 100%;"></div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">AVG (Total Earnings) By Year</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chartContainerYear" style="height: 370px; width: 100%;"></div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card" style="width: 40%;">
-                    <div class="card-header">
-                        Featured
-                    </div>
-                        <div id="chartContainerYear" style="height: 370px; width: 100%;"></div>
-                </div>
-
+                
 
 
                 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -40,12 +71,12 @@
 <script>
     window.onload = function () {
 
-        var chart = new CanvasJS.Chart("chartContainerCity", {
+        var chartCity = new CanvasJS.Chart("chartContainerCity", {
 			theme: "light2", // "light1", "light2", "dark1", "dark2"
 			exportEnabled: true,
 			animationEnabled: true,
 			title: {
-				text: "Employee by City",
+				text: "",
 				fontSize: 21
 			},
 			data: [{
@@ -55,29 +86,22 @@
 				indexLabel: "{label} - {y}%",
 				dataPoints: @Html.Raw(ViewBag.DataPointsCity)
 			}]
-		});
-		chart.render();
+        });
+        chartCity.render();
 
-    }
-</script>
-
-
-<script>
-	window.onload = function () {
-
-        var chart = new CanvasJS.Chart("chartContainerYear", {
+        var chartYear = new CanvasJS.Chart("chartContainerYear", {
 			animationEnabled: true,
 			theme: "light2", // "light1", "dark1", "dark2"
 			exportEnabled: true,
 			title: {
-				text: "AVG (Total Earnings) By Year"
+				text: ""
 			},
 			data: [{
 				type: "column",
 				dataPoints:  @Html.Raw(ViewBag.DataPointsYear)
 			}]
 		});
-		chart.render();
-
-	}
+		chartYear.render();
+    }
 </script>
+
