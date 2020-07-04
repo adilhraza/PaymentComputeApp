@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div id="chartContainerCity" style="height: 370px; width: 100%;"></div>
+                                <div id="chartEmployeesCity" style="height: 370px; width: 100%;"></div>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div id="chartContainerYear" style="height: 370px; width: 100%;"></div>
+                                <div id="chartAvgTotalEarningsYear" style="height: 370px; width: 100%;"></div>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -89,7 +89,7 @@
 <script>
     window.onload = function () {
 
-        var chart = new CanvasJS.Chart("chartContainerCity", {
+        var chart = new CanvasJS.Chart("chartEmployeesCity", {
 			theme: "light2", // "light1", "light2", "dark1", "dark2"
 			exportEnabled: true,
 			animationEnabled: true,
@@ -102,12 +102,12 @@
 				startAngle: 160,
 				toolTipContent: "<b>{label}</b>: {y}%",
 				indexLabel: "{label} - {y}%",
-				dataPoints: @Html.Raw(ViewBag.DataPointsCity)
+				dataPoints: @Html.Raw(ViewBag.DataPointsEmployeesCity)
 			}]
         });
         chart.render();
 
-        var chart = new CanvasJS.Chart("chartContainerYear", {
+        var chart = new CanvasJS.Chart("chartAvgTotalEarningsYear", {
 			animationEnabled: true,
 			theme: "light2", // "light1", "dark1", "dark2"
 			exportEnabled: true,
@@ -116,7 +116,7 @@
 			},
 			data: [{
 				type: "column",
-				dataPoints:  @Html.Raw(ViewBag.DataPointsYear)
+				dataPoints:  @Html.Raw(ViewBag.DataPointsAvgTotalEarningsYear)
 			}]
 		});
         chart.render();
@@ -131,7 +131,7 @@
 			},
 			data: [{
 				type: "column",
-				dataPoints:  @Html.Raw(ViewBag.DataPointsAvgTotalEarningsYear)
+				dataPoints:  @Html.Raw(ViewBag.DataPointsAvgTotalDeuctionYear)
 			}]
 		});
         chart.render();

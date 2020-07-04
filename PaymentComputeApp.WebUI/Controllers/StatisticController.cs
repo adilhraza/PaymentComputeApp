@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PaymentComputeApp.DataAccess.Repositories;
+using PaymentComputeApp.Entity.Models;
 using PaymentComputeApp.WebUI.Models;
 
 namespace PaymentComputeApp.WebUI.Controllers
@@ -22,28 +23,46 @@ namespace PaymentComputeApp.WebUI.Controllers
         {
             List<DataPoint> dataPoints = new List<DataPoint>();
 
+            ViewBag.DataPointsEmployeesCity = 
+                JsonConvert.SerializeObject(SetDataPointsEmployeesCity(dataPoints));
+            dataPoints.Clear();
+            
+            ViewBag.DataPointsAvgTotalEarningsYear = 
+                JsonConvert.SerializeObject(SetDataPointsAvgTotalEarningsYear(dataPoints));
+            dataPoints.Clear();
+
+            ViewBag.DataPointsAvgTotalDeuctionYear = 
+                JsonConvert.SerializeObject(SetDataPointsAvgTotalDeductionYear(dataPoints));
+            dataPoints.Clear();
+
+            return View();
+        }
+
+        private List<DataPoint> SetDataPointsEmployeesCity(List<DataPoint> dataPoints)
+        {
             var cities = _unitOfWork.EmployeeRepository.CountEmployeeByCity();
 
-            foreach(var city in cities)
+            foreach (var city in cities)
             {
                 dataPoints.Add(new DataPoint(city.City, city.CountCity));
             }
 
-            ViewBag.DataPointsCity = JsonConvert.SerializeObject(dataPoints);
+            return dataPoints;
+        }
 
-            dataPoints.Clear();
-
+        private List<DataPoint> SetDataPointsAvgTotalEarningsYear(List<DataPoint> dataPoints)
+        {
             var avgTotalEarningsYear = _unitOfWork.PaymentRepository.AvgTotalEarningsByYear();
 
             foreach (var item in avgTotalEarningsYear)
             {
-                dataPoints.Add(new DataPoint(item.YearOfPayment.ToString(), Convert.ToDouble(item.Amount)));
+                dataPoints.Add(new DataPoint(item.Year.ToString(), Convert.ToDouble(item.Amount)));
             }
 
-            ViewBag.DataPointsYear = JsonConvert.SerializeObject(dataPoints);
-
-            dataPoints.Clear();
-
+            return dataPoints;
+        }
+        private List<DataPoint> SetDataPointsAvgTotalDeductionYear(List<DataPoint> dataPoints)
+        {
             var avgTotalDeductionYear = _unitOfWork.PaymentRepository.AvgTotalDeductionByYear();
 
             foreach (var item in avgTotalDeductionYear)
@@ -51,9 +70,7 @@ namespace PaymentComputeApp.WebUI.Controllers
                 dataPoints.Add(new DataPoint(item.Year.ToString(), Convert.ToDouble(item.Amount)));
             }
 
-            ViewBag.DataPointsAvgTotalEarningsYear = JsonConvert.SerializeObject(dataPoints);
-
-            return View();
+            return dataPoints;
         }
     }
 }

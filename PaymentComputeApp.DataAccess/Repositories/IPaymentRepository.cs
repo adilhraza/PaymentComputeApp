@@ -7,7 +7,7 @@ namespace PaymentComputeApp.DataAccess.Repositories
 {
     public interface IPaymentRepository:IRepository<PaymentRecord>
     {
-        IEnumerable<AvgTotalEarningsYear> AvgTotalEarningsByYear();
+        IEnumerable<AvgAmountYear> AvgTotalEarningsByYear();
         IEnumerable<AvgAmountYear> AvgTotalDeductionByYear();
         IEnumerable<AvgAmountYear> AvgNetPaymentByYear();
     }
