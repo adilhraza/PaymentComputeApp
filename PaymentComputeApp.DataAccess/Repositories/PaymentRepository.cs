@@ -11,9 +11,21 @@ namespace PaymentComputeApp.DataAccess.Repositories
     {
         public PaymentRepository(ApplicationDbContext context) : base(context) { }
 
-        public IEnumerable<TotalEarningsYear> TotalEarningsByYear()
+        public IEnumerable<AvgTotalEarningsYear> AvgTotalEarningsByYear()
         {
-            return _context.TotalEarningsYear.FromSql("SELECT YEAR(PayDate) AS YearOfPayment, AVG(TotalEarnings) AS AvgTotalEarnings" +
+            return _context.TotalEarningsYear.FromSql("SELECT YEAR(PayDate) AS YearOfPayment, AVG(TotalEarnings) AS Amount" +
+                " FROM PaymentRecords GROUP BY YEAR(PayDate)").ToList();
+        }
+
+        public IEnumerable<AvgAmountYear> AvgTotalDeductionByYear()
+        {
+            return _context.AvgAmountYear.FromSql("SELECT YEAR(PayDate) AS Year, AVG(TotalDeduction) AS Amount" +
+                " FROM PaymentRecords GROUP BY YEAR(PayDate)").ToList();
+        }
+
+        public IEnumerable<AvgAmountYear> AvgNetPaymentByYear()
+        {
+            return _context.AvgAmountYear.FromSql("SELECT YEAR(PayDate) AS YearOfPayment, AVG(NetPayment) AS Amount" +
                 " FROM PaymentRecords GROUP BY YEAR(PayDate)").ToList();
         }
     }

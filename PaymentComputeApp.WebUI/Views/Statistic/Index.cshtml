@@ -17,7 +17,7 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Employee By City</h3>
+                                <h3 class="card-title">Employees/City</h3>
 
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -38,7 +38,7 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">AVG (Total Earnings) By Year</h3>
+                                <h3 class="card-title">AVG (Total Earnings)/Year</h3>
 
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -55,10 +55,28 @@
                             <!-- /.card-body -->
                         </div>
                     </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">AVG (Total Deduction)/Year</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chartAvgTotalDeductionYear" style="height: 370px; width: 100%;"></div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
                 </div>
-
-                
-
 
                 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
                 <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
@@ -71,7 +89,7 @@
 <script>
     window.onload = function () {
 
-        var chartCity = new CanvasJS.Chart("chartContainerCity", {
+        var chart = new CanvasJS.Chart("chartContainerCity", {
 			theme: "light2", // "light1", "light2", "dark1", "dark2"
 			exportEnabled: true,
 			animationEnabled: true,
@@ -87,9 +105,9 @@
 				dataPoints: @Html.Raw(ViewBag.DataPointsCity)
 			}]
         });
-        chartCity.render();
+        chart.render();
 
-        var chartYear = new CanvasJS.Chart("chartContainerYear", {
+        var chart = new CanvasJS.Chart("chartContainerYear", {
 			animationEnabled: true,
 			theme: "light2", // "light1", "dark1", "dark2"
 			exportEnabled: true,
@@ -101,7 +119,22 @@
 				dataPoints:  @Html.Raw(ViewBag.DataPointsYear)
 			}]
 		});
-		chartYear.render();
+        chart.render();
+
+
+        var chart = new CanvasJS.Chart("chartAvgTotalDeductionYear", {
+			animationEnabled: true,
+			theme: "light2", // "light1", "dark1", "dark2"
+			exportEnabled: true,
+			title: {
+				text: ""
+			},
+			data: [{
+				type: "column",
+				dataPoints:  @Html.Raw(ViewBag.DataPointsAvgTotalEarningsYear)
+			}]
+		});
+        chart.render();
     }
 </script>
 

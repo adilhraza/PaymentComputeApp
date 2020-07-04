@@ -4,9 +4,9 @@ using System.Text;
 
 namespace PaymentComputeApp.Entity.Models
 {
-    public class TotalEarningsYear
+    public class AvgTotalEarningsYear
     {
         public int YearOfPayment { get; set; }
-        public decimal AvgTotalEarnings { get; set; }
+        public decimal Amount { get; set; }
     }
 }

@@ -15,6 +15,7 @@ namespace PaymentComputeApp.DataAccess
         public DbSet<PaymentRecord> PaymentRecords { get; set; }
         public DbSet<TaxYear> TaxYears { get; set; }
         public DbQuery<EmployeeCity> EmployeeCity { get; set; }
-        public DbQuery<TotalEarningsYear> TotalEarningsYear { get; set; }
+        public DbQuery<AvgTotalEarningsYear> TotalEarningsYear { get; set; }
+        public DbQuery<AvgAmountYear> AvgAmountYear { get; set; }
     }
 }

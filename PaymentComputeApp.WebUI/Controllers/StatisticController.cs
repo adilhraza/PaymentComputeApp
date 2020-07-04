@@ -20,9 +20,9 @@ namespace PaymentComputeApp.WebUI.Controllers
 
         public IActionResult Index()
         {
-            var cities = _unitOfWork.EmployeeRepository.CountEmployeeByCity();
-
             List<DataPoint> dataPoints = new List<DataPoint>();
+
+            var cities = _unitOfWork.EmployeeRepository.CountEmployeeByCity();
 
             foreach(var city in cities)
             {
@@ -33,14 +33,25 @@ namespace PaymentComputeApp.WebUI.Controllers
 
             dataPoints.Clear();
 
-            var totalEarningsYear = _unitOfWork.PaymentRepository.TotalEarningsByYear();
+            var avgTotalEarningsYear = _unitOfWork.PaymentRepository.AvgTotalEarningsByYear();
 
-            foreach (var year in totalEarningsYear)
+            foreach (var item in avgTotalEarningsYear)
             {
-                dataPoints.Add(new DataPoint(year.YearOfPayment.ToString(), Convert.ToDouble(year.AvgTotalEarnings)));
+                dataPoints.Add(new DataPoint(item.YearOfPayment.ToString(), Convert.ToDouble(item.Amount)));
             }
 
             ViewBag.DataPointsYear = JsonConvert.SerializeObject(dataPoints);
+
+            dataPoints.Clear();
+
+            var avgTotalDeductionYear = _unitOfWork.PaymentRepository.AvgTotalDeductionByYear();
+
+            foreach (var item in avgTotalDeductionYear)
+            {
+                dataPoints.Add(new DataPoint(item.Year.ToString(), Convert.ToDouble(item.Amount)));
+            }
+
+            ViewBag.DataPointsAvgTotalEarningsYear = JsonConvert.SerializeObject(dataPoints);
 
             return View();
         }
