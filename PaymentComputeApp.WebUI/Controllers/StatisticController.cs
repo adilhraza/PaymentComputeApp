@@ -35,6 +35,10 @@ namespace PaymentComputeApp.WebUI.Controllers
                 JsonConvert.SerializeObject(SetDataPointsAvgTotalDeductionYear(dataPoints));
             dataPoints.Clear();
 
+            ViewBag.DataPointsAvgNetPaymentYear =
+                JsonConvert.SerializeObject(SetDataPointsAvgNetPaymentYear(dataPoints));
+            dataPoints.Clear();
+
             return View();
         }
 
@@ -61,11 +65,24 @@ namespace PaymentComputeApp.WebUI.Controllers
 
             return dataPoints;
         }
+
         private List<DataPoint> SetDataPointsAvgTotalDeductionYear(List<DataPoint> dataPoints)
         {
             var avgTotalDeductionYear = _unitOfWork.PaymentRepository.AvgTotalDeductionByYear();
 
             foreach (var item in avgTotalDeductionYear)
+            {
+                dataPoints.Add(new DataPoint(item.Year.ToString(), Convert.ToDouble(item.Amount)));
+            }
+
+            return dataPoints;
+        }
+
+        private List<DataPoint> SetDataPointsAvgNetPaymentYear(List<DataPoint> dataPoints)
+        {
+            var avgNetPaymentYear = _unitOfWork.PaymentRepository.AvgNetPaymentByYear();
+
+            foreach (var item in avgNetPaymentYear)
             {
                 dataPoints.Add(new DataPoint(item.Year.ToString(), Convert.ToDouble(item.Amount)));
             }

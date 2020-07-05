@@ -25,7 +25,7 @@ namespace PaymentComputeApp.DataAccess.Repositories
 
         public IEnumerable<AvgAmountYear> AvgNetPaymentByYear()
         {
-            return _context.AvgAmountYear.FromSql("SELECT YEAR(PayDate) AS YearOfPayment, AVG(NetPayment) AS Amount" +
+            return _context.AvgAmountYear.FromSql("SELECT YEAR(PayDate) AS Year, AVG(NetPayment) AS Amount" +
                 " FROM PaymentRecords GROUP BY YEAR(PayDate)").ToList();
         }
     }
