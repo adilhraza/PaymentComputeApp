@@ -4,14 +4,23 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using PaymentComputeApp.DataAccess.Repositories;
 using PaymentComputeApp.WebUI.Models;
 
 namespace PaymentComputeApp.WebUI.Controllers
 {
     public class HomeController : BaseController
     {
-        public IActionResult Index()
+        private readonly IUnitOfWork _unitOfWork;
+
+        public HomeController(IUnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            ViewBag.employeesNum = (await _unitOfWork.EmployeeRepository.GetAllAsync()).Count();
             return View();
         }
 
