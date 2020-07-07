@@ -28,5 +28,10 @@ namespace PaymentComputeApp.DataAccess.Repositories
             return _context.AvgAmountYear.FromSql("SELECT YEAR(PayDate) AS Year, AVG(NetPayment) AS Amount" +
                 " FROM PaymentRecords GROUP BY YEAR(PayDate)").ToList();
         }
+
+        public AvgHourlyRate AvgHourlyRateInfo()
+        {
+            return _context.AvgHourlyRate.FromSql("SELECT AVG(HourlyRate) AS Amount FROM PaymentRecords").FirstOrDefault();
+        } 
     }
 }

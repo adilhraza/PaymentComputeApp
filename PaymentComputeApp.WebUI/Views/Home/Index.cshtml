@@ -8,32 +8,40 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Blank Page</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Blank Page</li>
-                    </ol>
+                    <h1>Dashboard</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
-
-
+        <br />
         <div class="row">
             <div class="col-md-3">
 
                 <!-- small box -->
-                <div class="small-box bg-aqua">
+                <div class="small-box bg-white">
                     <div class="inner">
                         <h3>@ViewBag.employeesNum</h3>
 
-                        <p>Emolpyees</p>
+                        <p>Total Emolpyees</p>
                     </div>
                     <div class="icon">
                         <i class="nav-icon fas fa-user"></i>
                     </div>
                     <a asp-controller="Employee" asp-action="Index" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-md-3">
+
+                <!-- small box -->
+                <div class="small-box bg-white">
+                    <div class="inner">
+                        <h3>@ViewBag.AvgHourlyRate</h3>
+
+                        <p>AVG(HourlyRate)</p>
+                    </div>
+                    <div class="icon">
+                        <i class="nav-icon fas fa-hourglass"></i>
+                    </div>
+                    <a asp-controller="Payment" asp-action="Index" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
         </div>

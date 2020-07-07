@@ -10,5 +10,6 @@ namespace PaymentComputeApp.DataAccess.Repositories
         IEnumerable<AvgAmountYear> AvgTotalEarningsByYear();
         IEnumerable<AvgAmountYear> AvgTotalDeductionByYear();
         IEnumerable<AvgAmountYear> AvgNetPaymentByYear();
+        AvgHourlyRate AvgHourlyRateInfo();
     }
 }
