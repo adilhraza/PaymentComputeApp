@@ -21,7 +21,8 @@ namespace PaymentComputeApp.WebUI.Controllers
         public async Task<IActionResult> Index()
         {
             ViewBag.employeesNum = (await _unitOfWork.EmployeeRepository.GetAllAsync()).Count();
-            ViewBag.AvgHourlyRate = _unitOfWork.PaymentRepository.AvgHourlyRateInfo().Amount;
+            ViewBag.avgHourlyRate = Convert.ToDecimal(_unitOfWork.PaymentRepository.AvgHourlyRateInfo().Amount.ToString("n2"));
+            ViewBag.avgOvertimeEarnings = Convert.ToDecimal(_unitOfWork.PaymentRepository.AvgOvertimeEarningsInfo().Amount.ToString("n2"));
 
             return View();
         }

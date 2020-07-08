@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PaymentComputeApp.Entity.Models
 {
-    public class AvgHourlyRate
+    public class AvgAmount
     {
         public decimal Amount { get; set; }
     }
