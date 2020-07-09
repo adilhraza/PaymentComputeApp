@@ -31,7 +31,7 @@ namespace PaymentComputeApp.WebUI.Controllers
                 JsonConvert.SerializeObject(SetDataPointsAvgTotalEarningsYear(dataPoints));
             dataPoints.Clear();
 
-            ViewBag.DataPointsAvgTotalDeuctionYear = 
+            ViewBag.DataPointsAvgTotalDeductionYear = 
                 JsonConvert.SerializeObject(SetDataPointsAvgTotalDeductionYear(dataPoints));
             dataPoints.Clear();
 

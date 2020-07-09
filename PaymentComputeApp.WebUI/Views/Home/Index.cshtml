@@ -75,7 +75,64 @@
             </div>
         </div>
 
-    </section>
-    
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-bold">Yearly Report</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</section>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </div>
 <!-- /.content-wrapper -->
+
+<script>
+	window.onload = function () {
+
+	var chart = new CanvasJS.Chart("chartContainer", {
+		animationEnabled: true,
+		title:{
+			text: ""
+		},
+		axisY :{
+			includeZero: false,
+			prefix: "$"
+		},
+		toolTip: {
+			shared: true
+		},
+		data: [{
+			type: "splineArea",
+            showInLegend: true,
+            name: "AVG (Total Earnings)",
+            yValueFormatString: "$#,##0",
+			dataPoints: @Html.Raw(ViewBag.DataPointsAvgTotalEarningsYear)
+			
+ 		},
+		{
+			type: "splineArea",
+            showInLegend: true,
+            name: "AVG (Total Deduction)",
+			yValueFormatString: "$#,##0",
+			dataPoints: @Html.Raw(ViewBag.DataPointsAvgTotalDeductionYear)
+			
+ 		},
+		{
+			type: "splineArea",
+            showInLegend: true,
+            name: "AVG (Net Payment)",
+			yValueFormatString: "$#,##0",
+			dataPoints: @Html.Raw(ViewBag.DataPointsAvgNetPaymentYear)
+ 		}]
+	});
+	chart.render();
+
+	}
+</script>
