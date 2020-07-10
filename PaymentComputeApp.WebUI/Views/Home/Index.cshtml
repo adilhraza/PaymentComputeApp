@@ -40,7 +40,7 @@
                         <p>Payment Records</p>
                     </div>
                     <div class="icon">
-                        <i class="nav-icon fas fa-user"></i>
+                        <i class="nav-icon fas fa-record-vinyl"></i>
                     </div>
                     <a asp-controller="Payment" asp-action="Index" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
@@ -68,7 +68,7 @@
                         <p>AVG (Overtime Earnings)</p>
                     </div>
                     <div class="icon">
-                        <i class="nav-icon fas fa-hourglass"></i>
+                        <i class="nav-icon fas fa-dollar-sign"></i>
                     </div>
                     <a asp-controller="Payment" asp-action="Index" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
@@ -76,7 +76,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title text-bold">Yearly Report</h3>
@@ -86,9 +86,32 @@
                     </div>
                 </div>
             </div>
+
+            @{ 
+                var totalEarningsStatus = (ViewBag.avgPaymentsInfoPercent.AvgTotalEarningsPercent >= 0) ? "fa-caret-up" : "fa-caret-down";
+                var netPaymentStatus = (@ViewBag.avgPaymentsInfoPercent.AvgNetPaymentPercent >= 0) ? "fa-caret-up" : "fa-caret-down";
+                var totalDeductionStatus = (@ViewBag.avgPaymentsInfoPercent.AvgTotalDeduction >= 0) ? "fa-caret-up" : "fa-caret-down";
+            }
+
+            <div class="col-md-4">
+                <div class="card" style="height: 455px;">
+                    <div class="border-bottom" style="margin:0 60px;text-align:center;padding:27px;font-size: 40px;">
+                        <i class="fa @totalEarningsStatus"></i> @ViewBag.avgPaymentsInfoPercent.AvgTotalEarningsPercent.ToString("n2") %
+                        <h4>AVG (Total Earnings)</h4>
+                    </div>
+                    <div class="border-bottom" style="margin:0 60px ;text-align:center;padding:27px;font-size: 40px;">
+                        <i class="fa @netPaymentStatus"></i> @ViewBag.avgPaymentsInfoPercent.AvgNetPaymentPercent.ToString("n2") %
+                        <h4>AVG (Net Payments)</h4>
+                    </div>
+                    <div style="margin:0 60px;text-align:center;padding:27px;font-size: 40px;">
+                        <i class="fa @totalDeductionStatus"></i> @ViewBag.avgPaymentsInfoPercent.AvgTotalDeduction.ToString("n2") %
+                        <h4>AVG (Total Deduction)</h4>
+                    </div>
+                </div>
+            </div>
         </div>
 
-</section>
+    </section>
     <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </div>
 <!-- /.content-wrapper -->
@@ -114,7 +137,7 @@
             name: "AVG (Total Earnings)",
             yValueFormatString: "$#,##0",
 			dataPoints: @Html.Raw(ViewBag.DataPointsAvgTotalEarningsYear)
-			
+
  		},
 		{
 			type: "splineArea",
@@ -122,7 +145,7 @@
             name: "AVG (Total Deduction)",
 			yValueFormatString: "$#,##0",
 			dataPoints: @Html.Raw(ViewBag.DataPointsAvgTotalDeductionYear)
-			
+
  		},
 		{
 			type: "splineArea",

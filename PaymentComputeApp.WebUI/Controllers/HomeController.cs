@@ -40,6 +40,8 @@ namespace PaymentComputeApp.WebUI.Controllers
                 JsonConvert.SerializeObject(SetDataPointsAvgNetPaymentYear(dataPoints));
             dataPoints.Clear();
 
+            ViewBag.avgPaymentsInfoPercent = _unitOfWork.PaymentRepository.AvgPaymentsInfoPercent();
+
             return View();
         }
 

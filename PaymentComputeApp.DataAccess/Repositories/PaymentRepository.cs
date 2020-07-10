@@ -12,31 +12,36 @@ namespace PaymentComputeApp.DataAccess.Repositories
         public PaymentRepository(ApplicationDbContext context) : base(context) { }
 
         public IEnumerable<AvgAmountYear> AvgTotalEarningsByYear()
-        {
-            return _context.AvgAmountYear.FromSql("SELECT YEAR(PayDate) AS Year, AVG(TotalEarnings) AS Amount" +
+            => _context.AvgAmountYear.FromSql("SELECT YEAR(PayDate) AS Year, AVG(TotalEarnings) AS Amount" +
                 " FROM PaymentRecords GROUP BY YEAR(PayDate)").ToList();
-        }
 
         public IEnumerable<AvgAmountYear> AvgTotalDeductionByYear()
-        {
-            return _context.AvgAmountYear.FromSql("SELECT YEAR(PayDate) AS Year, AVG(TotalDeduction) AS Amount" +
+            => _context.AvgAmountYear.FromSql("SELECT YEAR(PayDate) AS Year, AVG(TotalDeduction) AS Amount" +
                 " FROM PaymentRecords GROUP BY YEAR(PayDate)").ToList();
-        }
 
         public IEnumerable<AvgAmountYear> AvgNetPaymentByYear()
-        {
-            return _context.AvgAmountYear.FromSql("SELECT YEAR(PayDate) AS Year, AVG(NetPayment) AS Amount" +
+            => _context.AvgAmountYear.FromSql("SELECT YEAR(PayDate) AS Year, AVG(NetPayment) AS Amount" +
                 " FROM PaymentRecords GROUP BY YEAR(PayDate)").ToList();
-        }
 
         public AvgAmount AvgHourlyRateInfo()
-        {
-            return _context.AvgAmount.FromSql("SELECT AVG(HourlyRate) AS Amount FROM PaymentRecords").FirstOrDefault();
-        } 
+            => _context.AvgAmount.FromSql("SELECT AVG(HourlyRate) AS Amount FROM PaymentRecords").FirstOrDefault();
 
         public AvgAmount AvgOvertimeEarningsInfo()
-        {
-            return _context.AvgAmount.FromSql("SELECT AVG(OvertimeEarnings) AS Amount FROM PaymentRecords").FirstOrDefault();
-        }
+            => _context.AvgAmount.FromSql("SELECT AVG(OvertimeEarnings) AS Amount FROM PaymentRecords").FirstOrDefault();
+
+        public AvgMultipleAmount AvgPaymentsInfoPercent()
+            => _context.AvgMultipleAmount.FromSql("SELECT IIF((SELECT AVG(TotalEarnings) FROM PaymentRecords " +
+                "WHERE YEAR(PayDate) = 2020) = 0, 0,AVG(TotalEarnings)/" +
+                "(SELECT AVG(TotalEarnings) FROM PaymentRecords " +
+                "WHERE YEAR(PayDate)=2020)*100) AS AvgTotalEarningsPercent," +
+                "IIF((SELECT AVG(NetPayment) FROM PaymentRecords " +
+                "WHERE YEAR(PayDate) = 2020)=0, 0, AVG(NetPayment)/" +
+                "(SELECT AVG(NetPayment) FROM PaymentRecords " +
+                "WHERE YEAR(PayDate)=2020)*100) AS AvgNetPaymentPercent," +
+                "IIF((SELECT AVG(TotalDeduction) FROM PaymentRecords " +
+                "WHERE YEAR(PayDate) = 2020)=0, 0, AVG(TotalDeduction)/" +
+                "(SELECT AVG(TotalDeduction) FROM PaymentRecords " +
+                "WHERE YEAR(PayDate)=2020)*100) AS AvgTotalDeduction " +
+                "FROM PaymentRecords WHERE YEAR(PayDate)=2019").FirstOrDefault();
     }
 }
