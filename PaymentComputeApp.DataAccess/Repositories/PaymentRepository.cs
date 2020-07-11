@@ -30,18 +30,24 @@ namespace PaymentComputeApp.DataAccess.Repositories
             => _context.AvgAmount.FromSql("SELECT AVG(OvertimeEarnings) AS Amount FROM PaymentRecords").FirstOrDefault();
 
         public AvgMultipleAmount AvgPaymentsInfoPercent()
-            => _context.AvgMultipleAmount.FromSql("SELECT IIF((SELECT AVG(TotalEarnings) FROM PaymentRecords " +
-                "WHERE YEAR(PayDate) = 2020) = 0, 0,AVG(TotalEarnings)/" +
-                "(SELECT AVG(TotalEarnings) FROM PaymentRecords " +
-                "WHERE YEAR(PayDate)=2020)*100) AS AvgTotalEarningsPercent," +
-                "IIF((SELECT AVG(NetPayment) FROM PaymentRecords " +
-                "WHERE YEAR(PayDate) = 2020)=0, 0, AVG(NetPayment)/" +
-                "(SELECT AVG(NetPayment) FROM PaymentRecords " +
-                "WHERE YEAR(PayDate)=2020)*100) AS AvgNetPaymentPercent," +
-                "IIF((SELECT AVG(TotalDeduction) FROM PaymentRecords " +
-                "WHERE YEAR(PayDate) = 2020)=0, 0, AVG(TotalDeduction)/" +
-                "(SELECT AVG(TotalDeduction) FROM PaymentRecords " +
-                "WHERE YEAR(PayDate)=2020)*100) AS AvgTotalDeduction " +
-                "FROM PaymentRecords WHERE YEAR(PayDate)=2019").FirstOrDefault();
+        {
+            var currentYear = DateTime.Today.Year;
+            var lastYear = currentYear - 1;
+            string sqlQuery = $@"SELECT IIF((SELECT AVG(TotalEarnings) FROM PaymentRecords 
+                    WHERE YEAR(PayDate) = {currentYear}) = 0, 0,AVG(TotalEarnings)/
+                    (SELECT AVG(TotalEarnings) FROM PaymentRecords 
+                    WHERE YEAR(PayDate)={currentYear})*100) AS AvgTotalEarningsPercent,
+                    IIF((SELECT AVG(NetPayment) FROM PaymentRecords 
+                    WHERE YEAR(PayDate) = {currentYear})=0, 0, AVG(NetPayment)/
+                    (SELECT AVG(NetPayment) FROM PaymentRecords 
+                    WHERE YEAR(PayDate)={currentYear})*100) AS AvgNetPaymentPercent,
+                    IIF((SELECT AVG(TotalDeduction) FROM PaymentRecords
+                    WHERE YEAR(PayDate) = {currentYear})=0, 0, AVG(TotalDeduction)/
+                    (SELECT AVG(TotalDeduction) FROM PaymentRecords 
+                    WHERE YEAR(PayDate)={currentYear})*100) AS AvgTotalDeduction 
+                    FROM PaymentRecords WHERE YEAR(PayDate)={lastYear}";
+
+            return _context.AvgMultipleAmount.FromSql(sqlQuery).FirstOrDefault(); 
+        }
     }
 }
