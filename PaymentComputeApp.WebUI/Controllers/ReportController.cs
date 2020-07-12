@@ -173,33 +173,54 @@ namespace PaymentComputeApp.WebUI.Controllers
 
         public async Task<IActionResult> EmployeeExportToExcel(string searchField)
         {
-            byte[] fileContents;
+           // byte[] fileContents;
             var employees = await GetEmployeesByName(searchField);
 
             ExcelPackage Ep = new ExcelPackage();
             ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("Employee_Info");
-            Sheet.Cells["A1"].Value = "Employee No.";
-            Sheet.Cells["B1"].Value = "First Name";
-            Sheet.Cells["C1"].Value = "Last Name";
-            Sheet.Cells["D1"].Value = "Gender";
-            Sheet.Cells["E1"].Value = "Date Joined";
-            Sheet.Cells["F1"].Value = "Designation";
-            Sheet.Cells["G1"].Value = "City";
+            Sheet.Cells[1,1].Value = "Employee No.";
+            Sheet.Cells[1,2].Value = "First Name";
+            Sheet.Cells[1,3].Value = "Last Name";
+            Sheet.Cells[1,4].Value = "Gender";
+            Sheet.Cells[1,5].Value = "Date Joined";
+            Sheet.Cells[1,6].Value = "Designation";
+            Sheet.Cells[1,7].Value = "City";
 
             int row = 2;
             foreach (var item in employees)
             {
-                Sheet.Cells[string.Format("A{0}", row)].Value = item.EmployeeNo;
-                Sheet.Cells[string.Format("B{0}", row)].Value = item.FirstName;
-                Sheet.Cells[string.Format("C{0}", row)].Value = item.LastName;
-                Sheet.Cells[string.Format("D{0}", row)].Value = item.Gender;
-                Sheet.Cells[string.Format("E{0}", row)].Value = item.DateJoined;
-                Sheet.Cells[string.Format("F{0}", row)].Value = item.Designation;
-                Sheet.Cells[string.Format("G{0}", row)].Value = item.City;
+                Sheet.Cells[row, 1].Value = item.EmployeeNo;
+                Sheet.Cells[row, 2].Value = item.FirstName;
+                Sheet.Cells[row, 3].Value = item.LastName;
+                Sheet.Cells[row, 4].Value = item.Gender;
+                Sheet.Cells[row, 5].Value = item.DateJoined;
+                Sheet.Cells[row, 6].Value = item.Designation;
+                Sheet.Cells[row, 7].Value = item.City;
                 row++;
             }
 
             Sheet.Cells["A:AZ"].AutoFitColumns();
+            /*   Response.Clear();
+               Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+               fileContents = Ep.GetAsByteArray();
+
+               if (fileContents == null || fileContents.Length == 0)
+               {
+                   return NotFound();
+               }
+
+               return File(
+                   fileContents: fileContents,
+                   contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                   fileDownloadName: "Employee.xlsx"
+               );*/
+
+            return GetFileContentResult(Ep, "Employee");
+        }
+
+        private IActionResult GetFileContentResult(ExcelPackage Ep, string fileName)
+        {
+            byte[] fileContents;
             Response.Clear();
             Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             fileContents = Ep.GetAsByteArray();
@@ -212,7 +233,7 @@ namespace PaymentComputeApp.WebUI.Controllers
             return File(
                 fileContents: fileContents,
                 contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                fileDownloadName: "Employee.xlsx"
+                fileDownloadName: $"{fileName}.xlsx"
             );
         }
 
