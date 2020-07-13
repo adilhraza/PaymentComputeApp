@@ -21,6 +21,7 @@ namespace PaymentComputeApp.WebUI.Controllers
         {
             _unitOfWork = unitOfWork;
         }
+
         public async Task<IActionResult> EmployeeByName(string searchField, int? pageNumber)
         {
             var employees = await GetEmployeesByName(searchField);
@@ -171,9 +172,40 @@ namespace PaymentComputeApp.WebUI.Controllers
             return View(PagedList<PaymentIndexViewModel>.Create(payments, pageNumber ?? 1));
         }
 
-        public async Task<IActionResult> EmployeeExportToExcel(string searchField)
+        public async Task<IActionResult> EmployeeByCityExportToExcel(string city)
         {
-           // byte[] fileContents;
+            var employees = await GetEmployeesByCity(city);
+
+            ExcelPackage Ep = new ExcelPackage();
+            ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("Employee_Info");
+            Sheet.Cells[1, 1].Value = "Employee No.";
+            Sheet.Cells[1, 2].Value = "First Name";
+            Sheet.Cells[1, 3].Value = "Last Name";
+            Sheet.Cells[1, 4].Value = "Gender";
+            Sheet.Cells[1, 5].Value = "Date Joined";
+            Sheet.Cells[1, 6].Value = "Designation";
+            Sheet.Cells[1, 7].Value = "City";
+
+            int row = 2;
+            foreach (var item in employees)
+            {
+                Sheet.Cells[row, 1].Value = item.EmployeeNo;
+                Sheet.Cells[row, 2].Value = item.FirstName;
+                Sheet.Cells[row, 3].Value = item.LastName;
+                Sheet.Cells[row, 4].Value = item.Gender;
+                Sheet.Cells[row, 5].Value = item.DateJoined;
+                Sheet.Cells[row, 6].Value = item.Designation;
+                Sheet.Cells[row, 7].Value = item.City;
+                row++;
+            }
+
+            Sheet.Cells["A:AZ"].AutoFitColumns();
+
+            return GetFileContentResult(Ep, "Employee");
+        }
+
+        public async Task<IActionResult> EmployeeByNameExportToExcel(string searchField)
+        {
             var employees = await GetEmployeesByName(searchField);
 
             ExcelPackage Ep = new ExcelPackage();
@@ -200,20 +232,6 @@ namespace PaymentComputeApp.WebUI.Controllers
             }
 
             Sheet.Cells["A:AZ"].AutoFitColumns();
-            /*   Response.Clear();
-               Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-               fileContents = Ep.GetAsByteArray();
-
-               if (fileContents == null || fileContents.Length == 0)
-               {
-                   return NotFound();
-               }
-
-               return File(
-                   fileContents: fileContents,
-                   contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                   fileDownloadName: "Employee.xlsx"
-               );*/
 
             return GetFileContentResult(Ep, "Employee");
         }
@@ -235,6 +253,46 @@ namespace PaymentComputeApp.WebUI.Controllers
                 contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 fileDownloadName: $"{fileName}.xlsx"
             );
+        }
+
+        public async Task<IEnumerable<EmployeeIndexViewModel>> GetEmployeesByCity(string city)
+        {
+            IEnumerable<EmployeeIndexViewModel> employees;
+
+            if (!String.IsNullOrEmpty(city))
+            {
+                employees = (await _unitOfWork.EmployeeRepository.GetAsync(x => x.City.Contains(city)))
+                .Select(employee => new EmployeeIndexViewModel
+                {
+                    Id = employee.Id,
+                    EmployeeNo = employee.EmployeeNo,
+                    FirstName = employee.FirstName,
+                    LastName = employee.LastName,
+                    Gender = employee.Gender,
+                    ImageUrl = employee.ImageUrl,
+                    DateJoined = employee.DateJoined,
+                    Designation = employee.Designation,
+                    City = employee.City
+                });
+            }
+            else
+            {
+                employees = (await _unitOfWork.EmployeeRepository.GetAllAsync())
+                .Select(employee => new EmployeeIndexViewModel
+                {
+                    Id = employee.Id,
+                    EmployeeNo = employee.EmployeeNo,
+                    FirstName = employee.FirstName,
+                    LastName = employee.LastName,
+                    Gender = employee.Gender,
+                    ImageUrl = employee.ImageUrl,
+                    DateJoined = employee.DateJoined,
+                    Designation = employee.Designation,
+                    City = employee.City
+                });
+            }
+
+            return employees;
         }
 
         private async Task<IEnumerable<EmployeeIndexViewModel>> GetEmployeesByName(string searchField)
