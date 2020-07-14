@@ -34,18 +34,21 @@ namespace PaymentComputeApp.DataAccess.Repositories
             var currentYear = DateTime.Today.Year;
             var lastYear = currentYear - 1;
             string sqlQuery = $@"SELECT IIF((SELECT AVG(TotalEarnings) FROM PaymentRecords 
-                    WHERE YEAR(PayDate) = {currentYear}) = 0, 0,AVG(TotalEarnings)/
+                    WHERE YEAR(PayDate) = {lastYear}) = 0, 0,(AVG(TotalEarnings)-
                     (SELECT AVG(TotalEarnings) FROM PaymentRecords 
-                    WHERE YEAR(PayDate)={currentYear})*100) AS AvgTotalEarningsPercent,
+                    WHERE YEAR(PayDate)={lastYear})))/(SELECT AVG(TotalEarnings)
+                    FROM PaymentRecords WHERE YEAR(PayDate) = {lastYear})*100 AS AvgTotalEarningsPercent,
                     IIF((SELECT AVG(NetPayment) FROM PaymentRecords 
-                    WHERE YEAR(PayDate) = {currentYear})=0, 0, AVG(NetPayment)/
+                    WHERE YEAR(PayDate) = {lastYear})=0, 0, (AVG(NetPayment)-
                     (SELECT AVG(NetPayment) FROM PaymentRecords 
-                    WHERE YEAR(PayDate)={currentYear})*100) AS AvgNetPaymentPercent,
+                    WHERE YEAR(PayDate)={lastYear})))/(SELECT AVG(NetPayment)
+                    FROM PaymentRecords WHERE YEAR(PayDate) = {lastYear})*100 AS AvgNetPaymentPercent,
                     IIF((SELECT AVG(TotalDeduction) FROM PaymentRecords
-                    WHERE YEAR(PayDate) = {currentYear})=0, 0, AVG(TotalDeduction)/
+                    WHERE YEAR(PayDate) = {lastYear})=0, 0, (AVG(TotalDeduction)-
                     (SELECT AVG(TotalDeduction) FROM PaymentRecords 
-                    WHERE YEAR(PayDate)={currentYear})*100) AS AvgTotalDeduction 
-                    FROM PaymentRecords WHERE YEAR(PayDate)={lastYear}";
+                    WHERE YEAR(PayDate)={lastYear})))/(SELECT AVG(TotalDeduction)
+                    FROM PaymentRecords WHERE YEAR(PayDate) = {lastYear})*100 AS AvgTotalDeduction 
+                    FROM PaymentRecords WHERE YEAR(PayDate)={currentYear}";
 
             return _context.AvgMultipleAmount.FromSql(sqlQuery).FirstOrDefault(); 
         }
