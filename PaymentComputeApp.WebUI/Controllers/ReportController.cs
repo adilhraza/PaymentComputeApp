@@ -201,7 +201,7 @@ namespace PaymentComputeApp.WebUI.Controllers
 
             Sheet.Cells["A:AZ"].AutoFitColumns();
 
-            return GetFileContentResult(Ep, "Employees");
+            return GetFileContentResult(Ep, "Employee_by_city");
         }
 
         public async Task<IActionResult> EmployeeByNameExportToExcel(string searchField)
@@ -233,7 +233,7 @@ namespace PaymentComputeApp.WebUI.Controllers
 
             Sheet.Cells["A:AZ"].AutoFitColumns();
 
-            return GetFileContentResult(Ep, "Employees");
+            return GetFileContentResult(Ep, "Employee_by_name");
         }
 
         public async Task<IActionResult> PaymentByDateExportToExcel(string dateFrom, string dateTo)
@@ -265,7 +265,39 @@ namespace PaymentComputeApp.WebUI.Controllers
 
             Sheet.Cells["A:AZ"].AutoFitColumns();
 
-            return GetFileContentResult(Ep, "Payments");
+            return GetFileContentResult(Ep, "Payment_by_date");
+        }
+
+        public async Task<IActionResult> PaymentByTotalEarningsExportToExcel(decimal totalEarnings)
+        {
+            var payments = await GetPaymentsByTotalEarnings(totalEarnings);
+
+            ExcelPackage Ep = new ExcelPackage();
+            ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("Payment_Info");
+            Sheet.Cells[1, 1].Value = "Full Name";
+            Sheet.Cells[1, 2].Value = "Pay Date";
+            Sheet.Cells[1, 3].Value = "Pay Month";
+            Sheet.Cells[1, 4].Value = "Year";
+            Sheet.Cells[1, 5].Value = "Total Earnings";
+            Sheet.Cells[1, 6].Value = "Total Deduction";
+            Sheet.Cells[1, 7].Value = "Net Payment";
+
+            int row = 2;
+            foreach (var item in payments)
+            {
+                Sheet.Cells[row, 1].Value = item.FullName;
+                Sheet.Cells[row, 2].Value = item.PayDate;
+                Sheet.Cells[row, 3].Value = item.PayMonth;
+                Sheet.Cells[row, 4].Value = item.Year;
+                Sheet.Cells[row, 5].Value = item.TotalEarnings;
+                Sheet.Cells[row, 6].Value = item.TotalDeduction;
+                Sheet.Cells[row, 7].Value = item.NetPayment;
+                row++;
+            }
+
+            Sheet.Cells["A:AZ"].AutoFitColumns();
+
+            return GetFileContentResult(Ep, "Payments_by_total_earnings");
         }
 
         private IActionResult GetFileContentResult(ExcelPackage Ep, string fileName)
@@ -372,6 +404,26 @@ namespace PaymentComputeApp.WebUI.Controllers
         {
             return (await _unitOfWork.PaymentRepository.GetAsync(includeProperties: "Employee",
                 filter: x => x.PayDate >= dateFrom && x.PayDate <= dateTo))
+                .Select(payment => new PaymentIndexViewModel
+                {
+                    Id = payment.Id,
+                    EmployeeId = payment.EmployeeId,
+                    FullName = payment.Employee.FirstName + " " + payment.Employee.LastName,
+                    PayDate = payment.PayDate,
+                    PayMonth = payment.PayMonth,
+                    TaxYearId = payment.TaxYearId,
+                    Year = _unitOfWork.TaxYearRepository.GetById(payment.TaxYearId).YearOfTax,
+                    TotalEarnings = payment.TotalEarnings,
+                    TotalDeduction = payment.TotalDeduction,
+                    NetPayment = payment.NetPayment,
+                    Employee = payment.Employee
+                });
+        }
+
+        private async Task<IEnumerable<PaymentIndexViewModel>> GetPaymentsByTotalEarnings(decimal totalEarnings)
+        {
+            return (await _unitOfWork.PaymentRepository.GetAsync(includeProperties: "Employee",
+                filter: x => x.TotalEarnings>=totalEarnings))
                 .Select(payment => new PaymentIndexViewModel
                 {
                     Id = payment.Id,
