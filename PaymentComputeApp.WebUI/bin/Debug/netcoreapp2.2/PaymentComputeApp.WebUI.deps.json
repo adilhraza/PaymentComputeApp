@@ -601,6 +601,7 @@
       },
       "PaymentComputeApp.Core/1.0.0": {
         "dependencies": {
+          "EPPlus": "4.5.3",
           "Microsoft.AspNetCore.Hosting": "2.2.0",
           "PaymentComputeApp.DataAccess": "1.0.0"
         },

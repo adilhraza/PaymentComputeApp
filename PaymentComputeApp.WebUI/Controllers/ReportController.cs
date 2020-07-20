@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +11,8 @@ using OfficeOpenXml.FormulaParsing.Excel.Functions.DateTime;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.RefAndLookup;
 using PaymentComputeApp.Core.Helpers;
 using PaymentComputeApp.DataAccess.Repositories;
+using PaymentComputeApp.Entity.Models;
+using PaymentComputeApp.WebUI.Extensions;
 using PaymentComputeApp.WebUI.Models;
 
 namespace PaymentComputeApp.WebUI.Controllers
@@ -178,8 +181,21 @@ namespace PaymentComputeApp.WebUI.Controllers
             var employees = await GetEmployeesByCity(city);
 
             ExcelPackage Ep = new ExcelPackage();
-            CreateExcelFileEmployeeIndex(Ep, employees, "Employee_Info");
+            //CreateExcelFileEmployeeIndex(Ep, employees, "Employee_Info");
+            //CreateExcel(Ep, employees.ToList());
 
+            var employeesExcel = employees.Select(x => new EmployeeExcel
+            {
+                EmployeeNo = x.EmployeeNo,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                Gender = x.Gender,
+                DateJoined = x.DateJoined,
+                Designation = x.Designation,
+                City = x.City
+            });
+
+            Ep.ExportToExcel("Employee_Info", employeesExcel);
             return GetFileContentResult(Ep, "Employee_by_city");
         }
 
@@ -462,6 +478,25 @@ namespace PaymentComputeApp.WebUI.Controllers
                 Sheet.Cells[row, 6].Value = item.TotalDeduction;
                 Sheet.Cells[row, 7].Value = item.NetPayment;
                 row++;
+            }
+
+            Sheet.Cells["A:AZ"].AutoFitColumns();
+        }
+
+        public void CreateExcel<T>(ExcelPackage ep, IList<T> data)
+        {
+            ExcelWorksheet Sheet = ep.Workbook.Worksheets.Add("Payment_Informer");
+            PropertyDescriptorCollection props =
+                TypeDescriptor.GetProperties(typeof(T));
+
+            int row = 2;
+            foreach(T item in data)
+            {
+                for (int i = 1; i < props.Count; i++) 
+                {
+                    Sheet.Cells[row, i].Value = props[i - 1].DisplayName;
+                    //Sheet.Cells[row, i].Value = props[i - 1].GetValue(item);
+                }
             }
 
             Sheet.Cells["A:AZ"].AutoFitColumns();
