@@ -19,7 +19,7 @@ namespace PaymentComputeApp.Entity.Models
         public string Gender { get; set; }
         
         [DisplayName("Date Joined")]
-        public DateTime DateJoined { get; set; }
+        public string DateJoined { get; set; }
         
         public string Designation { get; set; }
         

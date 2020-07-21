@@ -37,41 +37,7 @@ namespace PaymentComputeApp.WebUI.Controllers
 
         public async Task<IActionResult> EmployeeByCity(string city, int? pageNumber)
         {
-            IEnumerable<EmployeeIndexViewModel> employees;
-
-            if (!String.IsNullOrEmpty(city))
-            {
-                employees = (await _unitOfWork.EmployeeRepository.GetAsync(x => x.City.Contains(city)
-                    || x.City.Contains(city)))
-                .Select(employee => new EmployeeIndexViewModel
-                {
-                    Id = employee.Id,
-                    EmployeeNo = employee.EmployeeNo,
-                    FirstName = employee.FirstName,
-                    LastName = employee.LastName,
-                    Gender = employee.Gender,
-                    ImageUrl = employee.ImageUrl,
-                    DateJoined = employee.DateJoined,
-                    Designation = employee.Designation,
-                    City = employee.City
-                });
-            }
-            else
-            {
-                employees = (await _unitOfWork.EmployeeRepository.GetAllAsync())
-                .Select(employee => new EmployeeIndexViewModel
-                {
-                    Id = employee.Id,
-                    EmployeeNo = employee.EmployeeNo,
-                    FirstName = employee.FirstName,
-                    LastName = employee.LastName,
-                    Gender = employee.Gender,
-                    ImageUrl = employee.ImageUrl,
-                    DateJoined = employee.DateJoined,
-                    Designation = employee.Designation,
-                    City = employee.City
-                });
-            }
+            var employees = await GetEmployeesByCity(city);
 
             ViewData["city"] = city;
 
@@ -80,22 +46,24 @@ namespace PaymentComputeApp.WebUI.Controllers
 
         public async Task<IActionResult> PaymentByDate(string dateFrom, string dateTo, int? pageNumber)
         {
-            var payments = (await _unitOfWork.PaymentRepository.GetAsync(includeProperties: "Employee",
-                filter: x => x.PayDate >= Convert.ToDateTime(dateFrom) && x.PayDate <= Convert.ToDateTime(dateTo)))
-                .Select(payment => new PaymentIndexViewModel()
-                {
-                    Id = payment.Id,
-                    EmployeeId = payment.EmployeeId,
-                    FullName = payment.Employee.FirstName + " " + payment.Employee.LastName,
-                    PayDate = payment.PayDate,
-                    PayMonth = payment.PayMonth,
-                    TaxYearId = payment.TaxYearId,
-                    Year = _unitOfWork.TaxYearRepository.GetById(payment.TaxYearId).YearOfTax,
-                    TotalEarnings = payment.TotalEarnings,
-                    TotalDeduction = payment.TotalDeduction,
-                    NetPayment = payment.NetPayment,
-                    Employee = payment.Employee
-                });
+            /*      var payments = (await _unitOfWork.PaymentRepository.GetAsync(includeProperties: "Employee",
+                      filter: x => x.PayDate >= Convert.ToDateTime(dateFrom) && x.PayDate <= Convert.ToDateTime(dateTo)))
+                      .Select(payment => new PaymentIndexViewModel()
+                      {
+                          Id = payment.Id,
+                          EmployeeId = payment.EmployeeId,
+                          FullName = payment.Employee.FirstName + " " + payment.Employee.LastName,
+                          PayDate = payment.PayDate,
+                          PayMonth = payment.PayMonth,
+                          TaxYearId = payment.TaxYearId,
+                          Year = _unitOfWork.TaxYearRepository.GetById(payment.TaxYearId).YearOfTax,
+                          TotalEarnings = payment.TotalEarnings,
+                          TotalDeduction = payment.TotalDeduction,
+                          NetPayment = payment.NetPayment,
+                          Employee = payment.Employee
+                      });*/
+
+            var payments = await GetPaymentsByDate(Convert.ToDateTime(dateFrom), Convert.ToDateTime(dateTo));
 
             ViewData["dateFrom"] = dateFrom;
             ViewData["dateTo"] = dateTo;
@@ -181,8 +149,6 @@ namespace PaymentComputeApp.WebUI.Controllers
             var employees = await GetEmployeesByCity(city);
 
             ExcelPackage Ep = new ExcelPackage();
-            //CreateExcelFileEmployeeIndex(Ep, employees, "Employee_Info");
-            //CreateExcel(Ep, employees.ToList());
 
             var employeesExcel = employees.Select(x => new EmployeeExcel
             {
@@ -190,7 +156,7 @@ namespace PaymentComputeApp.WebUI.Controllers
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 Gender = x.Gender,
-                DateJoined = x.DateJoined,
+                DateJoined = x.DateJoined.ToString("dd/MM/yyyy"),
                 Designation = x.Designation,
                 City = x.City
             });
@@ -478,25 +444,6 @@ namespace PaymentComputeApp.WebUI.Controllers
                 Sheet.Cells[row, 6].Value = item.TotalDeduction;
                 Sheet.Cells[row, 7].Value = item.NetPayment;
                 row++;
-            }
-
-            Sheet.Cells["A:AZ"].AutoFitColumns();
-        }
-
-        public void CreateExcel<T>(ExcelPackage ep, IList<T> data)
-        {
-            ExcelWorksheet Sheet = ep.Workbook.Worksheets.Add("Payment_Informer");
-            PropertyDescriptorCollection props =
-                TypeDescriptor.GetProperties(typeof(T));
-
-            int row = 2;
-            foreach(T item in data)
-            {
-                for (int i = 1; i < props.Count; i++) 
-                {
-                    Sheet.Cells[row, i].Value = props[i - 1].DisplayName;
-                    //Sheet.Cells[row, i].Value = props[i - 1].GetValue(item);
-                }
             }
 
             Sheet.Cells["A:AZ"].AutoFitColumns();
