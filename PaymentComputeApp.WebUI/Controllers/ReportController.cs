@@ -46,23 +46,6 @@ namespace PaymentComputeApp.WebUI.Controllers
 
         public async Task<IActionResult> PaymentByDate(string dateFrom, string dateTo, int? pageNumber)
         {
-            /*      var payments = (await _unitOfWork.PaymentRepository.GetAsync(includeProperties: "Employee",
-                      filter: x => x.PayDate >= Convert.ToDateTime(dateFrom) && x.PayDate <= Convert.ToDateTime(dateTo)))
-                      .Select(payment => new PaymentIndexViewModel()
-                      {
-                          Id = payment.Id,
-                          EmployeeId = payment.EmployeeId,
-                          FullName = payment.Employee.FirstName + " " + payment.Employee.LastName,
-                          PayDate = payment.PayDate,
-                          PayMonth = payment.PayMonth,
-                          TaxYearId = payment.TaxYearId,
-                          Year = _unitOfWork.TaxYearRepository.GetById(payment.TaxYearId).YearOfTax,
-                          TotalEarnings = payment.TotalEarnings,
-                          TotalDeduction = payment.TotalDeduction,
-                          NetPayment = payment.NetPayment,
-                          Employee = payment.Employee
-                      });*/
-
             var payments = await GetPaymentsByDate(Convert.ToDateTime(dateFrom), Convert.ToDateTime(dateTo));
 
             ViewData["dateFrom"] = dateFrom;
@@ -73,22 +56,7 @@ namespace PaymentComputeApp.WebUI.Controllers
 
         public async Task<IActionResult> PaymentByTotalEarnings(decimal totalEarnings, int? pageNumber)
         {
-            var payments = (await _unitOfWork.PaymentRepository.GetAsync(includeProperties: "Employee",
-                filter: x => x.TotalEarnings >= totalEarnings))
-                .Select(payment => new PaymentIndexViewModel()
-                {
-                    Id = payment.Id,
-                    EmployeeId = payment.EmployeeId,
-                    FullName = payment.Employee.FirstName + " " + payment.Employee.LastName,
-                    PayDate = payment.PayDate,
-                    PayMonth = payment.PayMonth,
-                    TaxYearId = payment.TaxYearId,
-                    Year = _unitOfWork.TaxYearRepository.GetById(payment.TaxYearId).YearOfTax,
-                    TotalEarnings = payment.TotalEarnings,
-                    TotalDeduction = payment.TotalDeduction,
-                    NetPayment = payment.NetPayment,
-                    Employee = payment.Employee
-                });
+            var payments = await GetPaymentsByTotalEarnings(totalEarnings);
 
             ViewData["totalEarnings"] = totalEarnings;
 
@@ -97,22 +65,7 @@ namespace PaymentComputeApp.WebUI.Controllers
 
         public async Task<IActionResult> PaymentByTotalDeduction(decimal fromDeduction, decimal toDeduction, int? pageNumber)
         {
-            var payments = (await _unitOfWork.PaymentRepository.GetAsync(includeProperties: "Employee",
-                filter: x => x.TotalDeduction >= fromDeduction && x.TotalDeduction <= toDeduction))
-                .Select(payment => new PaymentIndexViewModel()
-                {
-                    Id = payment.Id,
-                    EmployeeId = payment.EmployeeId,
-                    FullName = payment.Employee.FirstName + " " + payment.Employee.LastName,
-                    PayDate = payment.PayDate,
-                    PayMonth = payment.PayMonth,
-                    TaxYearId = payment.TaxYearId,
-                    Year = _unitOfWork.TaxYearRepository.GetById(payment.TaxYearId).YearOfTax,
-                    TotalEarnings = payment.TotalEarnings,
-                    TotalDeduction = payment.TotalDeduction,
-                    NetPayment = payment.NetPayment,
-                    Employee = payment.Employee
-                });
+            var payments = await GetPaymentsBytTotalDeduction(fromDeduction, toDeduction);
 
             ViewData["fromDeduction"] = fromDeduction;
             ViewData["toDeduction"] = toDeduction;
@@ -122,22 +75,7 @@ namespace PaymentComputeApp.WebUI.Controllers
 
         public async Task<IActionResult> PaymentByTaxYear(string taxYear, int? pageNumber)
         {
-            var payments = (await _unitOfWork.PaymentRepository.GetAsync(includeProperties: "Employee",
-               filter: x => x.TaxYear.YearOfTax == taxYear))
-               .Select(payment => new PaymentIndexViewModel()
-               {
-                   Id = payment.Id,
-                   EmployeeId = payment.EmployeeId,
-                   FullName = payment.Employee.FirstName + " " + payment.Employee.LastName,
-                   PayDate = payment.PayDate,
-                   PayMonth = payment.PayMonth,
-                   TaxYearId = payment.TaxYearId,
-                   Year = _unitOfWork.TaxYearRepository.GetById(payment.TaxYearId).YearOfTax,
-                   TotalEarnings = payment.TotalEarnings,
-                   TotalDeduction = payment.TotalDeduction,
-                   NetPayment = payment.NetPayment,
-                   Employee = payment.Employee
-               });
+            var payments = await GetPaymentByTaxYear(taxYear);
 
             ViewData["taxYear"] = taxYear;
 
