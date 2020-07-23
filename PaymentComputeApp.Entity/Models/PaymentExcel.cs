@@ -12,7 +12,7 @@ namespace PaymentComputeApp.Entity.Models
         public string FullName { get; set; }
 
         [DisplayName("Pay Date")]
-        public DateTime PayDate { get; set; }
+        public string PayDate { get; set; }
 
         [DisplayName("Pay Month")]
         public string PayMonth { get; set; }

@@ -87,7 +87,6 @@ namespace PaymentComputeApp.WebUI.Controllers
             var employees = await GetEmployeesByCity(city);
 
             ExcelPackage Ep = new ExcelPackage();
-
             var employeesExcel = employees.Select(x => new EmployeeExcel
             {
                 EmployeeNo = x.EmployeeNo,
@@ -108,8 +107,18 @@ namespace PaymentComputeApp.WebUI.Controllers
             var employees = await GetEmployeesByName(searchField);
 
             ExcelPackage Ep = new ExcelPackage();
-            CreateExcelFileEmployeeIndex(Ep, employees, "Employee_Info");
+            var employeesExcel = employees.Select(x => new EmployeeExcel
+            {
+                EmployeeNo = x.EmployeeNo,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                Gender = x.Gender,
+                DateJoined = x.DateJoined.ToString("dd/MM/yyyy"),
+                Designation = x.Designation,
+                City = x.City
+            });
 
+            Ep.ExportToExcel("Employee_Info", employeesExcel);
             return GetFileContentResult(Ep, "Employee_by_name");
         }
 
@@ -118,8 +127,18 @@ namespace PaymentComputeApp.WebUI.Controllers
             var payments = await GetPaymentsByDate(Convert.ToDateTime(dateFrom), Convert.ToDateTime(dateTo));
 
             ExcelPackage Ep = new ExcelPackage();
-            CreateExcelFilePaymentIndex(Ep, payments, "Payment_Info");
+            var paymentsExcel = payments.Select(x => new PaymentExcel
+            {
+                FullName = x.FullName,
+                PayDate = x.PayDate.ToString("dd/MM/yyyy"),
+                PayMonth = x.PayMonth,
+                Year = x.Year,
+                TotalEarnings = x.TotalEarnings,
+                TotalDeduction = x.TotalDeduction,
+                NetPayment = x.NetPayment
+            });
 
+            Ep.ExportToExcel("Payment_Info", paymentsExcel);
             return GetFileContentResult(Ep, "Payment_by_date");
         }
 
@@ -128,8 +147,18 @@ namespace PaymentComputeApp.WebUI.Controllers
             var payments = await GetPaymentsByTotalEarnings(totalEarnings);
 
             ExcelPackage Ep = new ExcelPackage();
-            CreateExcelFilePaymentIndex(Ep, payments, "Payment_Info");
+            var paymentsExcel = payments.Select(x => new PaymentExcel
+            {
+                FullName = x.FullName,
+                PayDate = x.PayDate.ToString("dd/MM/yyyy"),
+                PayMonth = x.PayMonth,
+                Year = x.Year,
+                TotalEarnings = x.TotalEarnings,
+                TotalDeduction = x.TotalDeduction,
+                NetPayment = x.NetPayment
+            });
 
+            Ep.ExportToExcel("Payment_Info", paymentsExcel);
             return GetFileContentResult(Ep, "Payments_by_total_earnings");
         }
 
@@ -138,8 +167,18 @@ namespace PaymentComputeApp.WebUI.Controllers
             var payments = await GetPaymentsBytTotalDeduction(fromDeduction, toDeduction);
 
             ExcelPackage Ep = new ExcelPackage();
-            CreateExcelFilePaymentIndex(Ep, payments, "Payment_Info");
+            var paymentsExcel = payments.Select(x => new PaymentExcel
+            {
+                FullName = x.FullName,
+                PayDate = x.PayDate.ToString("dd/MM/yyyy"),
+                PayMonth = x.PayMonth,
+                Year = x.Year,
+                TotalEarnings = x.TotalEarnings,
+                TotalDeduction = x.TotalDeduction,
+                NetPayment = x.NetPayment
+            });
 
+            Ep.ExportToExcel("Payment_Info", paymentsExcel);
             return GetFileContentResult(Ep, "Payments_by_total_deduction");
         }
 
@@ -148,8 +187,18 @@ namespace PaymentComputeApp.WebUI.Controllers
             var payments = await GetPaymentByTaxYear(taxYear);
 
             ExcelPackage Ep = new ExcelPackage();
-            CreateExcelFilePaymentIndex(Ep, payments, "Payment_Info");
+            var paymentsExcel = payments.Select(x => new PaymentExcel
+            {
+                FullName = x.FullName,
+                PayDate = x.PayDate.ToString("dd/MM/yyyy"),
+                PayMonth = x.PayMonth,
+                Year = x.Year,
+                TotalEarnings = x.TotalEarnings,
+                TotalDeduction = x.TotalDeduction,
+                NetPayment = x.NetPayment
+            });
 
+            Ep.ExportToExcel("Payment_Info", paymentsExcel);
             return GetFileContentResult(Ep, "Payment_by_tax_year");
         }
 
@@ -331,60 +380,6 @@ namespace PaymentComputeApp.WebUI.Controllers
                    NetPayment = payment.NetPayment,
                    Employee = payment.Employee
                });
-        }
-
-        private void CreateExcelFileEmployeeIndex(ExcelPackage ep, IEnumerable<EmployeeIndexViewModel> employees, string sheetName)
-        {
-            ExcelWorksheet Sheet = ep.Workbook.Worksheets.Add(sheetName);
-            Sheet.Cells[1, 1].Value = "Employee No.";
-            Sheet.Cells[1, 2].Value = "First Name";
-            Sheet.Cells[1, 3].Value = "Last Name";
-            Sheet.Cells[1, 4].Value = "Gender";
-            Sheet.Cells[1, 5].Value = "Date Joined";
-            Sheet.Cells[1, 6].Value = "Designation";
-            Sheet.Cells[1, 7].Value = "City";
-
-            int row = 2;
-            foreach (var item in employees)
-            {
-                Sheet.Cells[row, 1].Value = item.EmployeeNo;
-                Sheet.Cells[row, 2].Value = item.FirstName;
-                Sheet.Cells[row, 3].Value = item.LastName;
-                Sheet.Cells[row, 4].Value = item.Gender;
-                Sheet.Cells[row, 5].Value = item.DateJoined;
-                Sheet.Cells[row, 6].Value = item.Designation;
-                Sheet.Cells[row, 7].Value = item.City;
-                row++;
-            }
-
-            Sheet.Cells["A:AZ"].AutoFitColumns();
-        }
-
-        private void CreateExcelFilePaymentIndex(ExcelPackage ep, IEnumerable<PaymentIndexViewModel> payments, string sheetName)
-        {
-            ExcelWorksheet Sheet = ep.Workbook.Worksheets.Add("Payment_Info");
-            Sheet.Cells[1, 1].Value = "Full Name";
-            Sheet.Cells[1, 2].Value = "Pay Date";
-            Sheet.Cells[1, 3].Value = "Pay Month";
-            Sheet.Cells[1, 4].Value = "Year";
-            Sheet.Cells[1, 5].Value = "Total Earnings";
-            Sheet.Cells[1, 6].Value = "Total Deduction";
-            Sheet.Cells[1, 7].Value = "Net Payment";
-
-            int row = 2;
-            foreach (var item in payments)
-            {
-                Sheet.Cells[row, 1].Value = item.FullName;
-                Sheet.Cells[row, 2].Value = item.PayDate;
-                Sheet.Cells[row, 3].Value = item.PayMonth;
-                Sheet.Cells[row, 4].Value = item.Year;
-                Sheet.Cells[row, 5].Value = item.TotalEarnings;
-                Sheet.Cells[row, 6].Value = item.TotalDeduction;
-                Sheet.Cells[row, 7].Value = item.NetPayment;
-                row++;
-            }
-
-            Sheet.Cells["A:AZ"].AutoFitColumns();
         }
     }
 }
